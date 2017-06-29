@@ -36,4 +36,19 @@ public class SnackbarItemAdapter extends RecyclerView.Adapter<SnackbarItemAdapte
             super(itemView);
         }
     }
+
+    public void addItem(SnackbarItem item){
+        mSnackbarItems.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(SnackbarItem item){
+        mSnackbarItems.remove(item);
+        notifyDataSetChanged();
+    }
+
+    public void clear(){
+        mSnackbarItems.clear();
+        notifyDataSetChanged();
+    }
 }

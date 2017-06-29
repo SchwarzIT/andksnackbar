@@ -7,4 +7,5 @@ package kaufland.com.snackbarlibrary;
 public class Configuration {
 
 
+
 }
