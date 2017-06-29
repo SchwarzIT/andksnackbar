@@ -21,3 +21,8 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext{
+    supportLibraryVersion= '25.3.1'
+    jUnitVersion = '4.12'
+}
