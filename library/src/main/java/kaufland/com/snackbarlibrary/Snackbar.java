@@ -4,7 +4,7 @@ import android.view.View;
 
 import java.util.Queue;
 
-import kaufland.com.snackbarlibrary.view.SnackbarItem;
+import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 /**
  * Created by vkos2006 on 6/27/17.
@@ -12,11 +12,13 @@ import kaufland.com.snackbarlibrary.view.SnackbarItem;
 public class Snackbar {
 
 
-    private Queue<SnackbarItem> mSnackBarItems;
+    private Queue<SnackbarView> mSnackBarViews;
 
     private Configuration mConfiguration;
 
     private View mSnackbarParentView;
+
+
 
 
 }
