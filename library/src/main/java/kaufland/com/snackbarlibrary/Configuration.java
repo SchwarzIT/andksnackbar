@@ -7,4 +7,7 @@ package kaufland.com.snackbarlibrary;
 public class Configuration {
 
     //TODO: Add configuration fields like top/bottom positioning and single/multiple SnackbarViews support
+
+
+
 }

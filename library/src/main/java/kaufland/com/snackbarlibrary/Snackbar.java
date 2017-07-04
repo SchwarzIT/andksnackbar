@@ -1,9 +1,6 @@
 package kaufland.com.snackbarlibrary;
-
 import android.view.View;
-
 import java.util.Queue;
-
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 /**
