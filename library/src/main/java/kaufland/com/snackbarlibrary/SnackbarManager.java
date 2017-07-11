@@ -1,18 +1,30 @@
 package kaufland.com.snackbarlibrary;
 
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
+import android.content.Context;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 public class SnackbarManager {
 
 
-    private SnackbarWrapper mSnackbarWrapper;
+    private static Snackbar mSnackbar;
 
-    private Queue<SnackbarView> mSnackbarViewsQueue;
+    private static  Configuration mConfiguration;
 
 
-    public SnackbarManager() {
-        mSnackbarViewsQueue = new ArrayBlockingQueue<>(10);
+    public static void init(Configuration configuration){
+        mConfiguration = configuration;
+    }
+
+    private SnackbarManager(Configuration configuration){
+        mConfiguration=configuration;
+    }
+
+    public static void makeSnackbar(Context applicationContext,SnackbarView view){
+        if(mSnackbar ==null){
+            mSnackbar = Snackbar.make(applicationContext,view);
+            mSnackbar.show();
+        }else{
+            mSnackbar.addSnackbar(view);
+        }
     }
 }
