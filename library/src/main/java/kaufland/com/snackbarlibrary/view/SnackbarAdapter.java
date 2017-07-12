@@ -59,12 +59,12 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
     public void addItem(SnackbarView item){
         mSnackbarViews.add(item);
         int position = mSnackbarViews.indexOf(item);
-        notifyItemRangeChanged(position,1);
+        notifyItemInserted(position);
     }
 
     public void removeItem(SnackbarView view){
         int position = mSnackbarViews.indexOf(view);
         mSnackbarViews.remove(position);
-        notifyItemRangeChanged(position,1);
+        notifyItemRemoved(position);
     }
 }
