@@ -1,6 +1,6 @@
 package kaufland.com.snackbarlibrary.view;
 
-import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -15,7 +15,7 @@ import kaufland.com.snackbarlibrary.R;
  * Created by vkos2006 on 7/3/17.
  */
 
-public class SnackbarViewWithTitleAndMessage implements SnackbarView {
+public class SnackbarViewWithTitleAndMessage extends SnackbarView {
 
     private View view;
     private TextView mTitle;
@@ -66,6 +66,16 @@ public class SnackbarViewWithTitleAndMessage implements SnackbarView {
 
         if(backgroundColor!=null){
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(),backgroundColor));
+        }
+
+        if(duration!=null && duration>0 && getCallback()!=null){
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getCallback().onDismiss(SnackbarViewWithTitleAndMessage.this);
+                }
+            },duration);
         }
     }
 

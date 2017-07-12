@@ -5,11 +5,26 @@
     android:layout_height="match_parent"
     tools:context="kaufland.com.demo.MainActivity">
 
-    <Button
-        android:id="@+id/create_snackbar_button"
-        android:text="Create Snackbar"
-       android:layout_gravity="bottom"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/create_text_snackbar_button"
+            android:text="Create Text Snackbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/create_snackbar_button"
+            android:text="Create Default Snackbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

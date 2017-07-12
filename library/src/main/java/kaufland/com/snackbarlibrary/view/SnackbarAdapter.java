@@ -42,6 +42,10 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
         return mSnackbarViews == null ? 0 : mSnackbarViews.size();
     }
 
+    public boolean isEmpty() {
+        return mSnackbarViews==null || mSnackbarViews.size()==0;
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -57,11 +61,6 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
 
     public void removeItem(SnackbarView item){
         mSnackbarViews.remove(item);
-        notifyDataSetChanged();
-    }
-
-    public void clear(){
-        mSnackbarViews.clear();
         notifyDataSetChanged();
     }
 }
