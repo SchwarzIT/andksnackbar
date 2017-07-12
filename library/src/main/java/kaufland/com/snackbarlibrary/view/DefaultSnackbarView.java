@@ -1,6 +1,6 @@
 package kaufland.com.snackbarlibrary.view;
 
-import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -17,7 +17,7 @@ import kaufland.com.snackbarlibrary.R;
  * Created by vkos2006 on 6/29/17.
  */
 
-public class DefaultSnackbarView implements SnackbarView {
+public class DefaultSnackbarView extends SnackbarView {
 
     private View view;
     private TextView mTitle;
@@ -83,7 +83,15 @@ public class DefaultSnackbarView implements SnackbarView {
                     boolean shouldDismiss = actionListener.onAction();
 
                     if(shouldDismiss){
-                        //TODO: Dismiss SnackbarView
+                        if(getCallback()!=null){
+                            new Handler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    getCallback().onDismiss(DefaultSnackbarView.this);
+                                }
+                            });
+
+                        }
                     }
                 }
             });

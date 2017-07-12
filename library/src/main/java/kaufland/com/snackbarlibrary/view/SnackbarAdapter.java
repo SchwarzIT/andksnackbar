@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import kaufland.com.snackbarlibrary.Snackbar;
+
 /**
  * Created by vkos2006 on 6/29/17.
  */
@@ -42,6 +44,10 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
         return mSnackbarViews == null ? 0 : mSnackbarViews.size();
     }
 
+    public boolean isEmpty() {
+        return mSnackbarViews==null || mSnackbarViews.size()==0;
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -52,16 +58,13 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
 
     public void addItem(SnackbarView item){
         mSnackbarViews.add(item);
-        notifyDataSetChanged();
+        int position = mSnackbarViews.indexOf(item);
+        notifyItemInserted(position);
     }
 
-    public void removeItem(SnackbarView item){
-        mSnackbarViews.remove(item);
-        notifyDataSetChanged();
-    }
-
-    public void clear(){
-        mSnackbarViews.clear();
-        notifyDataSetChanged();
+    public void removeItem(SnackbarView view){
+        int position = mSnackbarViews.indexOf(view);
+        mSnackbarViews.remove(position);
+        notifyItemRemoved(position);
     }
 }

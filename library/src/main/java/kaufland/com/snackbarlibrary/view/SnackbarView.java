@@ -3,15 +3,29 @@ package kaufland.com.snackbarlibrary.view;
 import android.view.View;
 import android.view.ViewGroup;
 
+import kaufland.com.snackbarlibrary.Callback;
+
 /**
  * Created by vkos2006 on 7/3/17.
  */
 
-public interface SnackbarView {
+public abstract class SnackbarView {
 
-    int getDuration();
+    private Callback callback;
 
-    View onCreateView(ViewGroup parent);
+    abstract int getDuration();
 
-    void onBindView();
+    abstract View onCreateView(ViewGroup parent);
+
+    abstract void onBindView();
+
+
+    public void setCallback(Callback callback){
+        this.callback=callback;
+    }
+
+    public Callback getCallback(){
+        return callback;
+    }
+
 }
