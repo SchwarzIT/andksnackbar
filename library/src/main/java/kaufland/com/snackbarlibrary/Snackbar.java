@@ -106,12 +106,12 @@ public class Snackbar implements Callback {
     @Override
     public void onDismiss(SnackbarView view) {
 
-        if (view != null && snackbarAdapter != null) {
+        if (view != null && snackbarAdapter != null && !snackbarAdapter.isEmpty()) {
             snackbarAdapter.removeItem(view);
         }
 
         if(snackbarAdapter.isEmpty()){
-            windowManager.removeView(rootLayout);
+            rootLayout=null;
             instance=null;
         }
 
