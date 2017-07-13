@@ -76,6 +76,17 @@ public class DefaultSnackbarView extends SnackbarView {
             mActionButton.setImageDrawable(ContextCompat.getDrawable(view.getContext(), drawable));
         }
 
+        if(duration!=null && duration>0 && getCallback()!=null){
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getCallback().onDismiss(DefaultSnackbarView.this);
+                }
+            },duration);
+
+        }
+
         if(actionListener!=null){
             mActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
