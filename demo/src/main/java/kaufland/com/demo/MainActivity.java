@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Snackbar.getInstance(getApplicationContext()).make(new DefaultSnackbarView.Builder()
-                        .withMessage("Hello there!").withTitle("Example title")
+                        .withMessage("Hello there!")
+                        .withTitle("Example title")
+                        .withBoldTitleStyle()
                         .withActionDrawable(R.mipmap.ic_launcher)
                         .withActionListener(new ActionListener() {
                             @Override
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                                 return true;
                             }
                         })
+                        .withBackgroundColor(R.color.colorRed)
                         .build());
             }
         });
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                         .withTitle("Text snackbar title")
                         .withMessage("Text snackbar message")
                         .withDuration(2500)
+                        .withBackgroundColor(R.color.colorGreen)
+                        .withBoldMessageStyle()
                         .build());
             }
         });

@@ -3,10 +3,9 @@ package kaufland.com.snackbarlibrary.view;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import kaufland.com.snackbarlibrary.Snackbar;
 
 /**
  * Created by vkos2006 on 6/29/17.

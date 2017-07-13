@@ -1,5 +1,6 @@
 package kaufland.com.snackbarlibrary.view;
 
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -28,6 +29,9 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
     private Integer backgroundColor;
     private Integer duration;
 
+    private boolean isTitleBold;
+    private boolean isMessageBold;
+
     public SnackbarViewWithTitleAndMessage(Builder builder){
         title = builder.title;
         message = builder.message;
@@ -35,6 +39,8 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         messageColor=builder.messageColor;
         backgroundColor=builder.backgroundColor;
         duration=builder.duration;
+        isTitleBold=builder.isTitleBold;
+        isMessageBold=builder.isMessageBold;
     }
 
     @Override
@@ -62,6 +68,14 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
 
         if(messageColor!=null){
             mMessage.setTextColor(ContextCompat.getColor(view.getContext(),messageColor));
+        }
+
+        if(isTitleBold){
+            mTitle.setTypeface(mTitle.getTypeface(), Typeface.BOLD);
+        }
+
+        if(isMessageBold){
+            mMessage.setTypeface(mTitle.getTypeface(), Typeface.BOLD);
         }
 
         if(backgroundColor!=null){
@@ -92,6 +106,8 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         private Integer messageColor;
         private Integer backgroundColor;
         private Integer duration;
+        private boolean isTitleBold;
+        private boolean isMessageBold;
 
 
 
@@ -124,6 +140,18 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             this.duration=duration;
             return this;
         }
+
+
+        public Builder withBoldTitleStyle(){
+            isTitleBold=true;
+            return this;
+        }
+
+        public Builder withBoldMessageStyle(){
+            isMessageBold=true;
+            return this;
+        }
+
 
         public SnackbarView build(){
             return new SnackbarViewWithTitleAndMessage(this);

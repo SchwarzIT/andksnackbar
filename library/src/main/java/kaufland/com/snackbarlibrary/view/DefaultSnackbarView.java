@@ -1,5 +1,6 @@
 package kaufland.com.snackbarlibrary.view;
 
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -33,6 +34,9 @@ public class DefaultSnackbarView extends SnackbarView {
     private ActionListener actionListener;
     private Integer drawable;
 
+    private boolean isTitleBold;
+    private boolean isMessageBold;
+
 
     private  DefaultSnackbarView(Builder builder){
         title = builder.title;
@@ -43,6 +47,8 @@ public class DefaultSnackbarView extends SnackbarView {
         duration=builder.duration;
         actionListener=builder.actionListener;
         drawable=builder.drawable;
+        isTitleBold=builder.isTitleBold;
+        isMessageBold=builder.isMessageBold;
     }
 
 
@@ -66,6 +72,14 @@ public class DefaultSnackbarView extends SnackbarView {
 
         if(messageColor!=null){
             mMessage.setTextColor(ContextCompat.getColor(view.getContext(),messageColor));
+        }
+
+        if(isTitleBold){
+            mTitle.setTypeface(mTitle.getTypeface(), Typeface.BOLD);
+        }
+
+        if(isMessageBold){
+            mMessage.setTypeface(mTitle.getTypeface(), Typeface.BOLD);
         }
 
         if(backgroundColor!=null){
@@ -134,7 +148,8 @@ public class DefaultSnackbarView extends SnackbarView {
         private Integer duration;
         private ActionListener actionListener;
         private Integer drawable;
-
+        private boolean isTitleBold;
+        private boolean isMessageBold;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor){
@@ -151,6 +166,17 @@ public class DefaultSnackbarView extends SnackbarView {
             this.titleColor=titleColor;
             return this;
         }
+
+        public Builder withBoldTitleStyle(){
+            isTitleBold=true;
+            return this;
+        }
+
+        public Builder withBoldMessageStyle(){
+            isMessageBold=true;
+            return this;
+        }
+
 
         public Builder withMessage(@NonNull String message){
             this.message=message;
