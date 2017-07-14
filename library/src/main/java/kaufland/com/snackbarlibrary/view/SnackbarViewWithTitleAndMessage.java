@@ -2,6 +2,7 @@ package kaufland.com.snackbarlibrary.view;
 
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -84,17 +85,17 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
 
         if(duration!=null && duration>0 && getCallback()!=null){
 
-            new Handler().postDelayed(new Runnable() {
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     getCallback().onDismiss(SnackbarViewWithTitleAndMessage.this);
                 }
-            },duration);
+            },getDuration());
         }
     }
 
     @Override
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 

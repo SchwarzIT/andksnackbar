@@ -2,6 +2,7 @@ package kaufland.com.snackbarlibrary.view;
 
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -90,14 +91,14 @@ public class DefaultSnackbarView extends SnackbarView {
             mActionButton.setImageDrawable(ContextCompat.getDrawable(view.getContext(), drawable));
         }
 
-        if(duration!=null && duration>0 && getCallback()!=null){
+        if(getDuration()!=null && getDuration()>0 && getCallback()!=null){
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     getCallback().onDismiss(DefaultSnackbarView.this);
                 }
-            },duration);
+            },getDuration());
 
         }
 
@@ -109,7 +110,7 @@ public class DefaultSnackbarView extends SnackbarView {
 
                     if(shouldDismiss){
                         if(getCallback()!=null){
-                            new Handler().post(new Runnable() {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
                                     getCallback().onDismiss(DefaultSnackbarView.this);
@@ -124,7 +125,7 @@ public class DefaultSnackbarView extends SnackbarView {
     }
 
     @Override
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 

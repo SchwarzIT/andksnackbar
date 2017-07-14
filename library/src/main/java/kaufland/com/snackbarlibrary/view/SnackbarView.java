@@ -13,19 +13,18 @@ public abstract class SnackbarView {
 
     private Callback callback;
 
-    abstract int getDuration();
+    abstract Integer getDuration();
 
     abstract View onCreateView(ViewGroup parent);
 
     abstract void onBindView();
 
-
-    public void setCallback(Callback callback){
-        this.callback=callback;
+    public Callback getCallback() {
+        return callback;
     }
 
-    public Callback getCallback(){
-        return callback;
+    public void setCallback(Callback callback) {
+        this.callback = callback;
     }
 
 }
