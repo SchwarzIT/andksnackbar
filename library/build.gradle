@@ -38,5 +38,4 @@ dependencies {
     testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powermockVersion"
     testCompile "org.powermock:powermock-classloading-xstream:$rootProject.ext.powermockVersion"
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
-    testCompile "junit:junit:$rootProject.ext.jUnitVersion"
 }
