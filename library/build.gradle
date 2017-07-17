@@ -26,8 +26,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+
+    testCompile "junit:junit:$rootProject.ext.jUnitVersion"
+    testCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    testCompile "org.powermock:powermock-module-junit4:$rootProject.ext.powermockVersion"
+    testCompile "org.powermock:powermock-module-junit4-rule:$rootProject.ext.powermockVersion"
+    testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powermockVersion"
+    testCompile "org.powermock:powermock-classloading-xstream:$rootProject.ext.powermockVersion"
+    testCompile "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
     testCompile "junit:junit:$rootProject.ext.jUnitVersion"
 }

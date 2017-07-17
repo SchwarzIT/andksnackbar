@@ -27,7 +27,9 @@ ext{
     targetSdkVersion = 25
     minSdkVersion= 16
     buildToolsVersion = '26.0.0'
-
     supportLibraryVersion= '25.3.1'
     jUnitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    robolectricVersion= '3.2.2'
+    powermockVersion = '1.6.3'
 }

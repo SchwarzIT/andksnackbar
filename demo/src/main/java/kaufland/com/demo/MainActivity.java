@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Snackbar.getInstance(getApplicationContext()).make(new SnackbarViewWithTitleAndMessage.Builder()
-                        .withTitle("Text snackbar title")
-                        .withMessage("Text snackbar message")
+                        .withTitle("Text snackbar title!")
+                        .withMessage("Text snackbar message.")
                         .withDuration(2500)
                         .withBackgroundColor(R.color.colorGreen)
-                        .withBoldMessageStyle()
+                        .withBoldTitleStyle()
                         .build());
             }
         });
