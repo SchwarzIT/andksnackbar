@@ -15,10 +15,6 @@ import android.widget.TextView;
 
 import kaufland.com.snackbarlibrary.R;
 
-/**
- * Created by vkos2006 on 6/29/17.
- */
-
 public class DefaultSnackbarView extends SnackbarView {
 
     private View view;

@@ -18,9 +18,6 @@ import android.widget.FrameLayout;
 import kaufland.com.snackbarlibrary.view.SnackbarAdapter;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
-/**
- * Created by vkos2006 on 7/10/17.
- */
 
 public class Snackbar{
 

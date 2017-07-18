@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by vkos2006 on 6/29/17.
- */
 
 public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHolder> {
 

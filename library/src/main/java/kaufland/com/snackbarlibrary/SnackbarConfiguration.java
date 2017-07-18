@@ -1,12 +1,8 @@
 package kaufland.com.snackbarlibrary;
 
-/**
- * Created by vkos2006 on 6/29/17.
- */
 
 public class SnackbarConfiguration {
-
-    private static SnackbarConfiguration snackbarConfiguration;
+    
     private Gravity gravity;
     private SnackbarType snackbarType;
 
@@ -24,8 +20,8 @@ public class SnackbarConfiguration {
         return snackbarType;
     }
 
-    public static void configure(Builder builder) {
-        snackbarConfiguration = new SnackbarConfiguration(builder);
+    public static SnackbarConfiguration configure(Builder builder) {
+       return new SnackbarConfiguration(builder);
     }
 
     public enum Gravity {
