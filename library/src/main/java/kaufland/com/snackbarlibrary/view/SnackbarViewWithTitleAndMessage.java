@@ -83,15 +83,6 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(),backgroundColor));
         }
 
-        if(duration!=null && duration>0 && getCallback()!=null){
-
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    getCallback().onDismiss(SnackbarViewWithTitleAndMessage.this);
-                }
-            },getDuration());
-        }
     }
 
     @Override

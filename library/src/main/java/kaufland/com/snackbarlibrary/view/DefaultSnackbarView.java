@@ -90,38 +90,6 @@ public class DefaultSnackbarView extends SnackbarView {
         if(drawable!=null){
             mActionButton.setImageDrawable(ContextCompat.getDrawable(view.getContext(), drawable));
         }
-
-        if(getDuration()!=null && getDuration()>0 && getCallback()!=null){
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    getCallback().onDismiss(DefaultSnackbarView.this);
-                }
-            },getDuration());
-
-        }
-
-        if(actionListener!=null){
-            mActionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean shouldDismiss = actionListener.onAction();
-
-                    if(shouldDismiss){
-                        if(getCallback()!=null){
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    getCallback().onDismiss(DefaultSnackbarView.this);
-                                }
-                            });
-
-                        }
-                    }
-                }
-            });
-        }
     }
 
     @Override

@@ -5,11 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import kaufland.com.snackbarlibrary.Snackbar;
-import kaufland.com.snackbarlibrary.view.ActionListener;
-import kaufland.com.snackbarlibrary.view.DefaultSnackbarView;
-import kaufland.com.snackbarlibrary.view.SnackbarViewWithTitleAndMessage;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,32 +17,14 @@ public class MainActivity extends AppCompatActivity {
         createDefaultSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.getInstance(getApplicationContext()).make(new DefaultSnackbarView.Builder()
-                        .withMessage("Hello there!")
-                        .withTitle("Example title")
-                        .withBoldTitleStyle()
-                        .withActionDrawable(R.mipmap.ic_launcher)
-                        .withActionListener(new ActionListener() {
-                            @Override
-                            public boolean onAction() {
-                                //dismiss snackbar
-                                return true;
-                            }
-                        })
-                        .withBackgroundColor(R.color.colorRed)
-                        .build());
+
             }
         });
         createTextSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.getInstance(getApplicationContext()).make(new SnackbarViewWithTitleAndMessage.Builder()
-                        .withTitle("Text snackbar title!")
-                        .withMessage("Text snackbar message.")
-                        .withDuration(2500)
-                        .withBackgroundColor(R.color.colorGreen)
-                        .withBoldTitleStyle()
-                        .build());
+
+
             }
         });
 
