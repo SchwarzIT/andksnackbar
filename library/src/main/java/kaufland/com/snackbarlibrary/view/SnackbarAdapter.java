@@ -25,7 +25,7 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
 
         SnackbarView snackbarView = mSnackbarViews.get(position);
 
-        if(snackbarView!=null){
+        if (snackbarView != null) {
             snackbarView.onBindView();
         }
     }
@@ -41,26 +41,25 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
     }
 
     public boolean isEmpty() {
-        return mSnackbarViews==null || mSnackbarViews.size()==0;
+        return mSnackbarViews == null || mSnackbarViews.size() == 0;
     }
 
+    public void addItem(SnackbarView item) {
+        mSnackbarViews.add(item);
+        int position = mSnackbarViews.indexOf(item);
+        notifyItemInserted(position);
+    }
+
+    public void removeItem(SnackbarView view) {
+        int position = mSnackbarViews.indexOf(view);
+        mSnackbarViews.remove(position);
+        notifyItemRemoved(position);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ViewHolder(View itemView) {
             super(itemView);
         }
-    }
-
-    public void addItem(SnackbarView item){
-        mSnackbarViews.add(item);
-        int position = mSnackbarViews.indexOf(item);
-        notifyItemInserted(position);
-    }
-
-    public void removeItem(SnackbarView view){
-        int position = mSnackbarViews.indexOf(view);
-        mSnackbarViews.remove(position);
-        notifyItemRemoved(position);
     }
 }

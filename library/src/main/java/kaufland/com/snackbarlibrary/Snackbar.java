@@ -19,9 +19,9 @@ import kaufland.com.snackbarlibrary.view.SnackbarAdapter;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 
-public class Snackbar{
+public class Snackbar {
 
-    private  FrameLayout rootLayout;
+    private FrameLayout rootLayout;
     private WindowManager windowManager;
     private Context applicationContext;
     private LayoutInflater inflater;
@@ -30,7 +30,7 @@ public class Snackbar{
     private SnackbarConfiguration snackbarConfiguration;
 
 
-    public Snackbar(@NonNull final Context applicationContext,SnackbarConfiguration configuration) {
+    public Snackbar(@NonNull final Context applicationContext, SnackbarConfiguration configuration) {
         this.applicationContext = applicationContext;
         this.snackbarConfiguration = configuration;
         this.windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
@@ -78,16 +78,16 @@ public class Snackbar{
         snackbarRecycler.setAdapter(snackbarAdapter);
     }
 
-    public void addSnackbarView(SnackbarView snackbarView){
-        if(snackbarView!=null){
+    public void addSnackbarView(SnackbarView snackbarView) {
+        if (snackbarView != null) {
             show();
             snackbarAdapter.addItem(snackbarView);
         }
     }
 
-    public void removeSnackbarView(SnackbarView snackbarView){
+    public void removeSnackbarView(SnackbarView snackbarView) {
 
-        if(snackbarView!=null){
+        if (snackbarView != null) {
             snackbarAdapter.removeItem(snackbarView);
         }
     }

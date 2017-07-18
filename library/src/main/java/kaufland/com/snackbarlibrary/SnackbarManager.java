@@ -12,7 +12,7 @@ public class SnackbarManager {
 
     private static SnackbarConfiguration mSnackbarConfiguration;
 
-    private static Handler mHandler = new Handler(Looper.getMainLooper()){
+    private static Handler mHandler = new Handler(Looper.getMainLooper()) {
 
         @Override
         public void handleMessage(Message msg) {
@@ -22,14 +22,11 @@ public class SnackbarManager {
     };
 
 
-    public static void init(Context applicationContext,SnackbarConfiguration snackbarConfiguration){
-        mSnackbarConfiguration=snackbarConfiguration;
-        mSnackbar = new Snackbar(applicationContext,snackbarConfiguration);
+    public static void init(Context applicationContext, SnackbarConfiguration snackbarConfiguration) {
+        mSnackbarConfiguration = snackbarConfiguration;
+        mSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
 
     }
-
-
-
 
 
 }

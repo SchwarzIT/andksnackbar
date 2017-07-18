@@ -30,21 +30,21 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
     private boolean isTitleBold;
     private boolean isMessageBold;
 
-    public SnackbarViewWithTitleAndMessage(Builder builder){
+    public SnackbarViewWithTitleAndMessage(Builder builder) {
         title = builder.title;
         message = builder.message;
-        titleColor=builder.titleColor;
-        messageColor=builder.messageColor;
-        backgroundColor=builder.backgroundColor;
-        duration=builder.duration;
-        isTitleBold=builder.isTitleBold;
-        isMessageBold=builder.isMessageBold;
+        titleColor = builder.titleColor;
+        messageColor = builder.messageColor;
+        backgroundColor = builder.backgroundColor;
+        duration = builder.duration;
+        isTitleBold = builder.isTitleBold;
+        isMessageBold = builder.isMessageBold;
     }
 
     @Override
     public View onCreateView(ViewGroup parent) {
-        view=LayoutInflater.from(parent.getContext()).inflate(R.layout.view_snakbar_item_with_title_and_message,parent,false);
-        mTitle= (TextView) view.findViewById(R.id.text_view_title);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_snakbar_item_with_title_and_message, parent, false);
+        mTitle = (TextView) view.findViewById(R.id.text_view_title);
         mMessage = (TextView) view.findViewById(R.id.text_view_message);
         return view;
     }
@@ -52,32 +52,32 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
     @Override
     public void onBindView() {
 
-        if(title !=null){
+        if (title != null) {
             mTitle.setText(title);
         }
 
-        if(message!=null){
+        if (message != null) {
             mMessage.setText(message);
         }
 
-        if(titleColor!=null){
-            mTitle.setTextColor(ContextCompat.getColor(view.getContext(),titleColor));
+        if (titleColor != null) {
+            mTitle.setTextColor(ContextCompat.getColor(view.getContext(), titleColor));
         }
 
-        if(messageColor!=null){
-            mMessage.setTextColor(ContextCompat.getColor(view.getContext(),messageColor));
+        if (messageColor != null) {
+            mMessage.setTextColor(ContextCompat.getColor(view.getContext(), messageColor));
         }
 
-        if(isTitleBold){
+        if (isTitleBold) {
             mTitle.setTypeface(mTitle.getTypeface(), Typeface.BOLD);
         }
 
-        if(isMessageBold){
+        if (isMessageBold) {
             mMessage.setTypeface(mTitle.getTypeface(), Typeface.BOLD);
         }
 
-        if(backgroundColor!=null){
-            view.setBackgroundColor(ContextCompat.getColor(view.getContext(),backgroundColor));
+        if (backgroundColor != null) {
+            view.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
         }
 
     }
@@ -87,7 +87,7 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         return duration;
     }
 
-    public static class Builder{
+    public static class Builder {
 
         private String title;
         private String message;
@@ -99,50 +99,49 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         private boolean isMessageBold;
 
 
-
-        public Builder withBackgroundColor(@ColorRes int backgroundColor){
-            this.backgroundColor=backgroundColor;
+        public Builder withBackgroundColor(@ColorRes int backgroundColor) {
+            this.backgroundColor = backgroundColor;
             return this;
         }
 
-        public Builder withTitle(@NonNull String title){
-            this.title=title;
+        public Builder withTitle(@NonNull String title) {
+            this.title = title;
             return this;
         }
 
-        public Builder withTitleColor(@ColorRes int titleColor){
-            this.titleColor=titleColor;
+        public Builder withTitleColor(@ColorRes int titleColor) {
+            this.titleColor = titleColor;
             return this;
         }
 
-        public Builder withMessage(@NonNull String message){
-            this.message=message;
+        public Builder withMessage(@NonNull String message) {
+            this.message = message;
             return this;
         }
 
-        public Builder withMessageColor(@ColorRes int messageColor){
-            this.messageColor =messageColor;
+        public Builder withMessageColor(@ColorRes int messageColor) {
+            this.messageColor = messageColor;
             return this;
         }
 
-        public Builder withDuration(@NonNull Integer duration){
-            this.duration=duration;
-            return this;
-        }
-
-
-        public Builder withBoldTitleStyle(){
-            isTitleBold=true;
-            return this;
-        }
-
-        public Builder withBoldMessageStyle(){
-            isMessageBold=true;
+        public Builder withDuration(@NonNull Integer duration) {
+            this.duration = duration;
             return this;
         }
 
 
-        public SnackbarView build(){
+        public Builder withBoldTitleStyle() {
+            isTitleBold = true;
+            return this;
+        }
+
+        public Builder withBoldMessageStyle() {
+            isMessageBold = true;
+            return this;
+        }
+
+
+        public SnackbarView build() {
             return new SnackbarViewWithTitleAndMessage(this);
         }
     }

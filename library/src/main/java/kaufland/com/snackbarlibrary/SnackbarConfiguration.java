@@ -2,7 +2,7 @@ package kaufland.com.snackbarlibrary;
 
 
 public class SnackbarConfiguration {
-    
+
     private Gravity gravity;
     private SnackbarType snackbarType;
 
@@ -11,6 +11,9 @@ public class SnackbarConfiguration {
         this.snackbarType = builder.type;
     }
 
+    public static SnackbarConfiguration configure(Builder builder) {
+        return new SnackbarConfiguration(builder);
+    }
 
     public Gravity getGravity() {
         return gravity;
@@ -18,10 +21,6 @@ public class SnackbarConfiguration {
 
     public SnackbarType getSnackbarType() {
         return snackbarType;
-    }
-
-    public static SnackbarConfiguration configure(Builder builder) {
-       return new SnackbarConfiguration(builder);
     }
 
     public enum Gravity {
