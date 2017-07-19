@@ -1,16 +1,17 @@
 package kaufland.com.snackbarlibrary.view;
 
+import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import kaufland.com.snackbarlibrary.R;
@@ -34,6 +35,19 @@ public class DefaultSnackbarView extends SnackbarView {
     private boolean isTitleBold;
     private boolean isMessageBold;
 
+    private Integer titleMarginLeft;
+    private Integer titleMarginTop;
+    private Integer titleMarginRight;
+    private Integer titleMarginBottom;
+    private Integer messageMarginLeft;
+    private Integer messageMarginTop;
+    private Integer messageMarginRight;
+    private Integer messageMarginBottom;
+    private Integer actionButtonMarginLeft;
+    private Integer actionButtonMarginTop;
+    private Integer actionButtonMarginRight;
+    private Integer actionButtonMarginBottom;
+
 
     private DefaultSnackbarView(Builder builder) {
         title = builder.title;
@@ -46,6 +60,18 @@ public class DefaultSnackbarView extends SnackbarView {
         drawable = builder.drawable;
         isTitleBold = builder.isTitleBold;
         isMessageBold = builder.isMessageBold;
+        titleMarginLeft = builder.titleMarginLeft;
+        titleMarginTop = builder.titleMarginTop;
+        titleMarginRight = builder.titleMarginRight;
+        titleMarginBottom = builder.titleMarginBottom;
+        messageMarginLeft = builder.messageMarginLeft;
+        messageMarginTop = builder.messageMarginTop;
+        messageMarginRight = builder.messageMarginRight;
+        messageMarginBottom = builder.messageMarginBottom;
+        actionButtonMarginLeft = builder.actionButtonMarginLeft;
+        actionButtonMarginTop = builder.actionButtonMarginTop;
+        actionButtonMarginRight = builder.actionButtonMarginRight;
+        actionButtonMarginBottom = builder.actionButtonMarginBottom;
     }
 
 
@@ -87,6 +113,24 @@ public class DefaultSnackbarView extends SnackbarView {
             mActionButton.setImageDrawable(ContextCompat.getDrawable(view.getContext(), drawable));
         }
 
+        if(titleMarginLeft!=null && titleMarginRight != null && titleMarginTop!=null && titleMarginBottom!=null){
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
+            layoutParams.setMargins(convertDpToPixel(titleMarginLeft),convertDpToPixel(titleMarginTop),convertDpToPixel(titleMarginRight),convertDpToPixel(titleMarginBottom));
+            mTitle.setLayoutParams(layoutParams);
+        }
+
+        if(messageMarginLeft!=null && messageMarginRight != null && messageMarginTop!=null && messageMarginBottom!=null){
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mMessage.getLayoutParams();
+            layoutParams.setMargins(convertDpToPixel(messageMarginLeft),convertDpToPixel(messageMarginTop),convertDpToPixel(messageMarginRight),convertDpToPixel(messageMarginBottom));
+            mMessage.setLayoutParams(layoutParams);
+        }
+
+        if(actionButtonMarginLeft!=null && actionButtonMarginRight != null && actionButtonMarginTop!=null && actionButtonMarginBottom!=null){
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mActionButton.getLayoutParams();
+            layoutParams.setMargins(convertDpToPixel(actionButtonMarginLeft),convertDpToPixel(actionButtonMarginTop),convertDpToPixel(actionButtonMarginRight),convertDpToPixel(actionButtonMarginBottom));
+            mActionButton.setLayoutParams(layoutParams);
+        }
+
         if (actionListener != null) {
             mActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,6 +145,13 @@ public class DefaultSnackbarView extends SnackbarView {
                 }
             });
         }
+    }
+
+    private int convertDpToPixel(int dp) {
+        Resources resources = view.getContext().getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        int px = dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
     }
 
     @Override
@@ -130,6 +181,18 @@ public class DefaultSnackbarView extends SnackbarView {
         private Integer drawable;
         private boolean isTitleBold;
         private boolean isMessageBold;
+        private Integer titleMarginLeft;
+        private Integer titleMarginTop;
+        private Integer titleMarginRight;
+        private Integer titleMarginBottom;
+        private Integer messageMarginLeft;
+        private Integer messageMarginTop;
+        private Integer messageMarginRight;
+        private Integer messageMarginBottom;
+        private Integer actionButtonMarginLeft;
+        private Integer actionButtonMarginTop;
+        private Integer actionButtonMarginRight;
+        private Integer actionButtonMarginBottom;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
@@ -152,6 +215,14 @@ public class DefaultSnackbarView extends SnackbarView {
             return this;
         }
 
+        public Builder withMarginsAroundTitle(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+            titleMarginLeft = left;
+            titleMarginTop=top;
+            titleMarginRight=right;
+            titleMarginBottom =bottom;
+            return this;
+        }
+
         public Builder withBoldMessageStyle() {
             isMessageBold = true;
             return this;
@@ -168,6 +239,14 @@ public class DefaultSnackbarView extends SnackbarView {
             return this;
         }
 
+        public Builder withMarginsAroundMessage(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+            messageMarginLeft = left;
+            messageMarginTop=top;
+            messageMarginRight=right;
+            messageMarginBottom =bottom;
+            return this;
+        }
+
         public Builder withDuration(@NonNull Integer duration) {
             this.duration = duration;
             return this;
@@ -180,6 +259,14 @@ public class DefaultSnackbarView extends SnackbarView {
 
         public Builder withActionDrawable(@DrawableRes Integer drawable) {
             this.drawable = drawable;
+            return this;
+        }
+
+        public Builder withMarginsAroundActionButton(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+            actionButtonMarginLeft = left;
+            actionButtonMarginTop=top;
+            actionButtonMarginRight=right;
+            actionButtonMarginBottom =bottom;
             return this;
         }
 

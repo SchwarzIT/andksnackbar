@@ -1,14 +1,19 @@
 package kaufland.com.snackbarlibrary.view;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import kaufland.com.snackbarlibrary.R;
@@ -30,6 +35,15 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
     private boolean isTitleBold;
     private boolean isMessageBold;
 
+    private Integer titleMarginLeft;
+    private Integer titleMarginTop;
+    private Integer titleMarginRight;
+    private Integer titleMarginBottom;
+    private Integer messageMarginLeft;
+    private Integer messageMarginTop;
+    private Integer messageMarginRight;
+    private Integer messageMarginBottom;
+
     public SnackbarViewWithTitleAndMessage(Builder builder) {
         title = builder.title;
         message = builder.message;
@@ -39,6 +53,14 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         duration = builder.duration;
         isTitleBold = builder.isTitleBold;
         isMessageBold = builder.isMessageBold;
+        titleMarginLeft = builder.titleMarginLeft;
+        titleMarginTop = builder.titleMarginTop;
+        titleMarginRight = builder.titleMarginRight;
+        titleMarginBottom = builder.titleMarginBottom;
+        messageMarginLeft = builder.messageMarginLeft;
+        messageMarginTop = builder.messageMarginTop;
+        messageMarginRight = builder.messageMarginRight;
+        messageMarginBottom = builder.messageMarginBottom;
     }
 
     @Override
@@ -80,6 +102,25 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
         }
 
+        if(titleMarginLeft!=null && titleMarginRight != null && titleMarginTop!=null && titleMarginBottom!=null){
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
+            layoutParams.setMargins(convertDpToPixel(titleMarginLeft),convertDpToPixel(titleMarginTop),convertDpToPixel(titleMarginRight),convertDpToPixel(titleMarginBottom));
+            mTitle.setLayoutParams(layoutParams);
+        }
+
+        if(messageMarginLeft!=null && messageMarginRight != null && messageMarginTop!=null && messageMarginBottom!=null){
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mMessage.getLayoutParams();
+            layoutParams.setMargins(convertDpToPixel(messageMarginLeft),convertDpToPixel(messageMarginTop),convertDpToPixel(messageMarginRight),convertDpToPixel(messageMarginBottom));
+            mMessage.setLayoutParams(layoutParams);
+        }
+
+    }
+
+    private int convertDpToPixel(int dp) {
+        Resources resources = view.getContext().getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        int px = dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
     }
 
     @Override
@@ -97,6 +138,14 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         private Integer duration;
         private boolean isTitleBold;
         private boolean isMessageBold;
+        private Integer titleMarginLeft;
+        private Integer titleMarginTop;
+        private Integer titleMarginRight;
+        private Integer titleMarginBottom;
+        private Integer messageMarginLeft;
+        private Integer messageMarginTop;
+        private Integer messageMarginRight;
+        private Integer messageMarginBottom;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
@@ -114,6 +163,14 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             return this;
         }
 
+        public Builder withMarginsAroundTitle(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+            titleMarginLeft = left;
+            titleMarginTop=top;
+            titleMarginRight=right;
+            titleMarginBottom =bottom;
+            return this;
+        }
+
         public Builder withMessage(@NonNull String message) {
             this.message = message;
             return this;
@@ -121,6 +178,14 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
 
         public Builder withMessageColor(@ColorRes int messageColor) {
             this.messageColor = messageColor;
+            return this;
+        }
+
+        public Builder withMarginsAroundMessage(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+            messageMarginLeft = left;
+            messageMarginTop=top;
+            messageMarginRight=right;
+            messageMarginBottom =bottom;
             return this;
         }
 
@@ -139,6 +204,7 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             isMessageBold = true;
             return this;
         }
+
 
 
         public SnackbarView build() {

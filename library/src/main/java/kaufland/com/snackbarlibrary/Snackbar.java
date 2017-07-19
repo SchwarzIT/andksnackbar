@@ -30,7 +30,7 @@ public class Snackbar {
     private SnackbarConfiguration snackbarConfiguration;
 
 
-    public Snackbar(@NonNull final Context applicationContext, SnackbarConfiguration configuration) {
+    public Snackbar(@NonNull final Context applicationContext, @NonNull SnackbarConfiguration configuration) {
         this.applicationContext = applicationContext;
         this.snackbarConfiguration = configuration;
         this.windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
