@@ -34,11 +34,9 @@ public class SnackbarManager {
             return false;
         }
     });
-    private static SnackbarConfiguration sSnackbarConfiguration;
     private static Semaphore sSemaphore;
 
     public static void init(Context applicationContext, SnackbarConfiguration snackbarConfiguration) {
-        sSnackbarConfiguration = snackbarConfiguration;
         sSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
         if (snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)) {
             sSemaphore = new Semaphore(1);
