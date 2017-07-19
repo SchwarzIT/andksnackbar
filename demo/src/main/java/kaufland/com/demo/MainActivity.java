@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                         .withBoldTitleStyle()
                         .withMessage("Example default message")
                         .withMessageColor(R.color.colorWhite)
+                        .withBoldMessageStyle()
                         .withActionDrawable(R.mipmap.ic_launcher)
                         .withActionListener(new ActionListener() {
                             @Override
