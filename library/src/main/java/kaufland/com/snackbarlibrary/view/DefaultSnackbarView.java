@@ -87,14 +87,14 @@ public class DefaultSnackbarView extends SnackbarView {
             mActionButton.setImageDrawable(ContextCompat.getDrawable(view.getContext(), drawable));
         }
 
-        if(actionListener!=null){
+        if (actionListener != null) {
             mActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     boolean shouldDismiss = actionListener.onAction();
 
-                    if(shouldDismiss){
-                        if(getCallback()!=null){
+                    if (shouldDismiss) {
+                        if (getCallback() != null) {
                             getCallback().onDismiss();
                         }
                     }

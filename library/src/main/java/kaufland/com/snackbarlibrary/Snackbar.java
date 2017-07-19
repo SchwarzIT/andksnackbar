@@ -91,9 +91,9 @@ public class Snackbar {
             snackbarAdapter.removeItem(snackbarView);
         }
 
-        if(snackbarAdapter.isEmpty()){
+        if (snackbarAdapter.isEmpty()) {
             windowManager.removeView(rootLayout);
-            rootLayout=null;
+            rootLayout = null;
         }
     }
 }

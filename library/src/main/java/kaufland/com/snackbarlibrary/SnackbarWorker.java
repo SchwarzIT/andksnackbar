@@ -17,8 +17,8 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
     private Semaphore semaphore;
     private Handler handler;
 
-    public SnackbarWorker(SnackbarView snackbarView, Semaphore semaphore, Handler handler){
-        this.snackbarView=snackbarView;
+    public SnackbarWorker(SnackbarView snackbarView, Semaphore semaphore, Handler handler) {
+        this.snackbarView = snackbarView;
         this.semaphore = semaphore;
         this.handler = handler;
         snackbarView.setCallback(this);
@@ -29,7 +29,7 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
         try {
             semaphore.acquire();
             createMessage(SnackbarManager.MSG_SHOW);
-            if(snackbarView.getDuration()!=null && snackbarView.getDuration()>0){
+            if (snackbarView.getDuration() != null && snackbarView.getDuration() > 0) {
                 Thread.sleep(snackbarView.getDuration());
                 createMessage(SnackbarManager.MSG_DISMISS);
                 semaphore.release();
@@ -47,9 +47,9 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
     }
 
 
-    private Message createMessage(int what){
+    private Message createMessage(int what) {
         Message message = handler.obtainMessage();
-        message.what =what;
+        message.what = what;
         message.obj = snackbarView;
         message.sendToTarget();
         return message;

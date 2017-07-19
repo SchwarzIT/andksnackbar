@@ -15,9 +15,7 @@ public class SnackbarManager {
     public static final int MSG_SHOW = 0;
     public static final int MSG_DISMISS = 1;
     private static Snackbar sSnackbar;
-    private static SnackbarConfiguration sSnackbarConfiguration;
-    private static Semaphore sSemaphore;
-    private static final  Handler sHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+    private static final Handler sHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -36,23 +34,22 @@ public class SnackbarManager {
             return false;
         }
     });
-
+    private static SnackbarConfiguration sSnackbarConfiguration;
+    private static Semaphore sSemaphore;
 
     public static void init(Context applicationContext, SnackbarConfiguration snackbarConfiguration) {
         sSnackbarConfiguration = snackbarConfiguration;
         sSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
-        if(snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)){
+        if (snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)) {
             sSemaphore = new Semaphore(1);
-        }else{
+        } else {
             sSemaphore = new Semaphore(Runtime.getRuntime().availableProcessors());
         }
     }
 
-    public static void showSnackbar(SnackbarView view){
-        new SnackbarWorker(view,sSemaphore,sHandler).start();
+    public static void showSnackbar(SnackbarView view) {
+        new SnackbarWorker(view, sSemaphore, sHandler).start();
     }
-
-
 
 
 }
