@@ -19,7 +19,7 @@ import kaufland.com.snackbarlibrary.view.SnackbarAdapter;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 
-public class Snackbar {
+class Snackbar {
 
     private FrameLayout rootLayout;
     private WindowManager windowManager;
@@ -89,6 +89,11 @@ public class Snackbar {
 
         if (snackbarView != null) {
             snackbarAdapter.removeItem(snackbarView);
+        }
+
+        if(snackbarAdapter.isEmpty()){
+            windowManager.removeView(rootLayout);
+            rootLayout=null;
         }
     }
 }

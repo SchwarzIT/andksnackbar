@@ -6,10 +6,23 @@ import android.view.ViewGroup;
 
 public abstract class SnackbarView {
 
-    abstract Integer getDuration();
+    public interface Callback{
+        void onDismiss();
+    }
 
-    abstract View onCreateView(ViewGroup parent);
+    private Callback callback;
 
-    abstract void onBindView();
+    public abstract Integer getDuration();
 
+    public abstract View onCreateView(ViewGroup parent);
+
+    public abstract void onBindView();
+
+    public Callback getCallback() {
+        return callback;
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
 }

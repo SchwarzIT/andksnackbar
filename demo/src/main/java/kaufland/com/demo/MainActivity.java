@@ -5,6 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import kaufland.com.snackbarlibrary.SnackbarManager;
+import kaufland.com.snackbarlibrary.view.ActionListener;
+import kaufland.com.snackbarlibrary.view.DefaultSnackbarView;
+import kaufland.com.snackbarlibrary.view.SnackbarViewWithTitleAndMessage;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,12 +23,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                SnackbarManager.showSnackbar(new DefaultSnackbarView.Builder()
+                        .withBackgroundColor(R.color.colorGreen)
+                        .withTitle("Example default title")
+                        .withMessage("Example default message")
+                        .withActionDrawable(R.mipmap.ic_launcher)
+                        .withActionListener(new ActionListener() {
+                            @Override
+                            public boolean onAction() {
+                                return true;
+                            }
+                        })
+                        .build());
             }
         });
         createTextSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SnackbarManager.showSnackbar(new SnackbarViewWithTitleAndMessage.Builder()
+                        .withBackgroundColor(R.color.colorRed)
+                        .withTitle("Example title")
+                        .withMessage("Example message")
+                        .withDuration(2500)
+                        .build());
 
             }
         });

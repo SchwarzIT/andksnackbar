@@ -5,28 +5,54 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import java.util.concurrent.Semaphore;
+
+import kaufland.com.snackbarlibrary.view.SnackbarView;
+
 
 public class SnackbarManager {
 
-    private static Snackbar mSnackbar;
-
-    private static SnackbarConfiguration mSnackbarConfiguration;
-
-    private static Handler mHandler = new Handler(Looper.getMainLooper()) {
-
+    public static final int MSG_SHOW = 0;
+    public static final int MSG_DISMISS = 1;
+    private static Snackbar sSnackbar;
+    private static SnackbarConfiguration sSnackbarConfiguration;
+    private static Semaphore sSemaphore;
+    private static final  Handler sHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
 
+                case MSG_SHOW:
+                    SnackbarView viewToAdd = (SnackbarView) msg.obj;
+                    sSnackbar.addSnackbarView(viewToAdd);
+                    return true;
+
+                case MSG_DISMISS:
+                    SnackbarView viewToRemove = (SnackbarView) msg.obj;
+                    sSnackbar.removeSnackbarView(viewToRemove);
+                    return true;
+            }
+
+            return false;
         }
-    };
+    });
 
 
     public static void init(Context applicationContext, SnackbarConfiguration snackbarConfiguration) {
-        mSnackbarConfiguration = snackbarConfiguration;
-        mSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
-
+        sSnackbarConfiguration = snackbarConfiguration;
+        sSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
+        if(snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)){
+            sSemaphore = new Semaphore(1);
+        }else{
+            sSemaphore = new Semaphore(Runtime.getRuntime().availableProcessors());
+        }
     }
+
+    public static void showSnackbar(SnackbarView view){
+        new SnackbarWorker(view,sSemaphore,sHandler).start();
+    }
+
+
 
 
 }
