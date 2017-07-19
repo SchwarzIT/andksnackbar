@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
                 SnackbarManager.showSnackbar(new DefaultSnackbarView.Builder()
                         .withBackgroundColor(R.color.colorGreen)
                         .withTitle("Example default title")
+                        .withBoldTitleStyle()
                         .withMessage("Example default message")
+                        .withMessageColor(R.color.colorWhite)
                         .withActionDrawable(R.mipmap.ic_launcher)
                         .withActionListener(new ActionListener() {
                             @Override

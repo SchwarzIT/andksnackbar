@@ -19,7 +19,7 @@ import kaufland.com.snackbarlibrary.view.SnackbarAdapter;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 
-class Snackbar {
+public class Snackbar {
 
     private FrameLayout rootLayout;
     private WindowManager windowManager;
