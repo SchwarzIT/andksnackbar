@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         createTextSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SnackbarManager.showSnackbar(new SnackbarViewWithTitleAndMessage.Builder()
                         .withBackgroundColor(R.color.colorRed)
                         .withTitle("Example title")
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         .withBoldMessageStyle()
                         .withMarginsAroundMessage(16,16,16,16)
                         .withDuration(2500)
+                        .withElevation(30)
                         .build());
 
             }

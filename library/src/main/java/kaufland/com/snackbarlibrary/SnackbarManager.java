@@ -37,16 +37,30 @@ public class SnackbarManager {
     private static Semaphore sSemaphore;
 
     public static void init(Context applicationContext, SnackbarConfiguration snackbarConfiguration) {
+        if (applicationContext == null || snackbarConfiguration == null) {
+            return;
+        }
+
         sSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
+
         if (snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)) {
+
             sSemaphore = new Semaphore(1);
+
         } else {
+
             sSemaphore = new Semaphore(Runtime.getRuntime().availableProcessors());
+
         }
     }
 
     public static void showSnackbar(SnackbarView view) {
-        new SnackbarWorker(view, sSemaphore, sHandler).start();
+
+        if (view != null) {
+
+            new SnackbarWorker(view, sSemaphore, sHandler).start();
+
+        }
     }
 
 
