@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import kaufland.com.snackbarlibrary.R;
+import kaufland.com.snackbarlibrary.utils.ViewUtils;
 
 public class DefaultSnackbarView extends SnackbarView {
 
@@ -115,19 +116,32 @@ public class DefaultSnackbarView extends SnackbarView {
 
         if(titleMarginLeft!=null && titleMarginRight != null && titleMarginTop!=null && titleMarginBottom!=null){
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
-            layoutParams.setMargins(convertDpToPixel(titleMarginLeft),convertDpToPixel(titleMarginTop),convertDpToPixel(titleMarginRight),convertDpToPixel(titleMarginBottom));
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginBottom);
+
+            layoutParams.setMargins(marginLeftPx,marginTopPx,marginRightPx,marginBottomPx);
             mTitle.setLayoutParams(layoutParams);
         }
 
         if(messageMarginLeft!=null && messageMarginRight != null && messageMarginTop!=null && messageMarginBottom!=null){
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mMessage.getLayoutParams();
-            layoutParams.setMargins(convertDpToPixel(messageMarginLeft),convertDpToPixel(messageMarginTop),convertDpToPixel(messageMarginRight),convertDpToPixel(messageMarginBottom));
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginBottom);
+            layoutParams.setMargins(marginLeftPx,marginTopPx,marginRightPx,marginBottomPx);
             mMessage.setLayoutParams(layoutParams);
         }
 
         if(actionButtonMarginLeft!=null && actionButtonMarginRight != null && actionButtonMarginTop!=null && actionButtonMarginBottom!=null){
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mActionButton.getLayoutParams();
-            layoutParams.setMargins(convertDpToPixel(actionButtonMarginLeft),convertDpToPixel(actionButtonMarginTop),convertDpToPixel(actionButtonMarginRight),convertDpToPixel(actionButtonMarginBottom));
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(),actionButtonMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(),actionButtonMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(),actionButtonMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(),actionButtonMarginBottom);
+            layoutParams.setMargins(marginLeftPx,marginTopPx,marginRightPx,marginBottomPx);
             mActionButton.setLayoutParams(layoutParams);
         }
 
@@ -145,13 +159,6 @@ public class DefaultSnackbarView extends SnackbarView {
                 }
             });
         }
-    }
-
-    private int convertDpToPixel(int dp) {
-        Resources resources = view.getContext().getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        int px = dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-        return px;
     }
 
     @Override
