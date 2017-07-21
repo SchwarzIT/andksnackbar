@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                         .withBoldMessageStyle()
                         .withMarginsAroundMessage(16,16,16,16)
                         .withDuration(2500)
-                        .withElevation(30)
                         .build());
 
             }
