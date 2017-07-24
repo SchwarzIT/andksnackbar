@@ -56,7 +56,7 @@ public class SnackbarManager {
 
     public static void showSnackbar(SnackbarView view) {
 
-        if (view != null) {
+        if (view != null && sSemaphore != null && sHandler != null) {
 
             new SnackbarWorker(view, sSemaphore, sHandler).start();
 

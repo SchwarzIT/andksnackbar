@@ -52,7 +52,7 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
 
     public void removeItem(SnackbarView view) {
         int position = mSnackbarViews.indexOf(view);
-        if(position>-1){
+        if (position > -1) {
             mSnackbarViews.remove(position);
             notifyItemRemoved(position);
         }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import kaufland.com.snackbarlibrary.R;
 import kaufland.com.snackbarlibrary.utils.ViewUtils;
 
@@ -96,24 +97,24 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
         }
 
-        if(titleMarginLeft!=null && titleMarginRight != null && titleMarginTop!=null && titleMarginBottom!=null){
+        if (titleMarginLeft != null && titleMarginRight != null && titleMarginTop != null && titleMarginBottom != null) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
-            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginLeft);
-            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginRight);
-            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginTop);
-            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(),titleMarginBottom);
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(), titleMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(), titleMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(), titleMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(), titleMarginBottom);
 
-            layoutParams.setMargins(marginLeftPx,marginTopPx,marginRightPx,marginBottomPx);
+            layoutParams.setMargins(marginLeftPx, marginTopPx, marginRightPx, marginBottomPx);
             mTitle.setLayoutParams(layoutParams);
         }
 
-        if(messageMarginLeft!=null && messageMarginRight != null && messageMarginTop!=null && messageMarginBottom!=null){
+        if (messageMarginLeft != null && messageMarginRight != null && messageMarginTop != null && messageMarginBottom != null) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mMessage.getLayoutParams();
-            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginLeft);
-            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginRight);
-            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginTop);
-            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(),messageMarginBottom);
-            layoutParams.setMargins(marginLeftPx,marginTopPx,marginRightPx,marginBottomPx);
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(), messageMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(), messageMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(), messageMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(), messageMarginBottom);
+            layoutParams.setMargins(marginLeftPx, marginTopPx, marginRightPx, marginBottomPx);
             mMessage.setLayoutParams(layoutParams);
         }
 
@@ -159,11 +160,11 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             return this;
         }
 
-        public Builder withMarginsAroundTitle(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+        public Builder withMarginsAroundTitle(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom) {
             titleMarginLeft = left;
-            titleMarginTop=top;
-            titleMarginRight=right;
-            titleMarginBottom =bottom;
+            titleMarginTop = top;
+            titleMarginRight = right;
+            titleMarginBottom = bottom;
             return this;
         }
 
@@ -177,11 +178,11 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             return this;
         }
 
-        public Builder withMarginsAroundMessage(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom){
+        public Builder withMarginsAroundMessage(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom) {
             messageMarginLeft = left;
-            messageMarginTop=top;
-            messageMarginRight=right;
-            messageMarginBottom =bottom;
+            messageMarginTop = top;
+            messageMarginRight = right;
+            messageMarginBottom = bottom;
             return this;
         }
 
@@ -200,7 +201,6 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             isMessageBold = true;
             return this;
         }
-
 
 
         public SnackbarView build() {

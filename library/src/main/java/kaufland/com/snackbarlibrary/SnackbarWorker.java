@@ -7,9 +7,6 @@ import java.util.concurrent.Semaphore;
 
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
-/**
- * Created by vkos2006 on 7/19/17.
- */
 
 public class SnackbarWorker extends Thread implements SnackbarView.Callback {
 
