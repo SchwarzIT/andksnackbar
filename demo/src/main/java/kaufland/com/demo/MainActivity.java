@@ -14,15 +14,19 @@ import kaufland.com.snackbarlibrary.view.SnackbarViewWithTitleAndMessage;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button mCreateDefaultSnackbarButton;
+    private Button mCreateTextSnackbarButton;
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button createDefaultSnackbarButton = (Button) findViewById(R.id.create_snackbar_button);
-        Button createTextSnackbarButton = (Button) findViewById(R.id.create_text_snackbar_button);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        createDefaultSnackbarButton.setOnClickListener(new View.OnClickListener() {
+        mCreateDefaultSnackbarButton = (Button) findViewById(R.id.create_snackbar_button);
+        mCreateTextSnackbarButton = (Button) findViewById(R.id.create_text_snackbar_button);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        mCreateDefaultSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         .build());
             }
         });
-        createTextSnackbarButton.setOnClickListener(new View.OnClickListener() {
+        mCreateTextSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

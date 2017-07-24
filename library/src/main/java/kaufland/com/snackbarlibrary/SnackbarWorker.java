@@ -34,8 +34,6 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
 
         } catch (InterruptedException e) {
             mSemaphore.release();
-        }finally {
-            mSemaphore.release();
         }
     }
 
