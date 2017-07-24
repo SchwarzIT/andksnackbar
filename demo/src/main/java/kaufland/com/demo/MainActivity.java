@@ -2,6 +2,7 @@ package kaufland.com.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button createDefaultSnackbarButton = (Button) findViewById(R.id.create_snackbar_button);
         Button createTextSnackbarButton = (Button) findViewById(R.id.create_text_snackbar_button);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         createDefaultSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

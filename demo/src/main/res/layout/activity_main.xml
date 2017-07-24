@@ -5,24 +5,39 @@
     android:layout_height="match_parent"
     tools:context="kaufland.com.demo.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/default_horizontal_margin"
+        android:layout_marginRight="@dimen/default_horizontal_margin"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/create_text_snackbar_button"
-            android:text="Create Text Snackbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:textStyle="bold"
+            android:text="Create Text Snackbar" />
 
         <Button
             android:id="@+id/create_snackbar_button"
-            android:text="Create Default Snackbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:textStyle="bold"
+            android:text="Create Default Snackbar" />
 
 
     </LinearLayout>
