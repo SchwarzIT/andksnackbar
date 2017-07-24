@@ -173,6 +173,89 @@ public class DefaultSnackbarView extends SnackbarView {
         return view;
     }
 
+    public Integer getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public Integer getTitleColor() {
+        return titleColor;
+    }
+
+    public Integer getMessageColor() {
+        return messageColor;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ActionListener getActionListener() {
+        return actionListener;
+    }
+
+    public Integer getDrawable() {
+        return drawable;
+    }
+
+    public boolean isTitleBold() {
+        return isTitleBold;
+    }
+
+    public boolean isMessageBold() {
+        return isMessageBold;
+    }
+
+    public Integer getTitleMarginLeft() {
+        return titleMarginLeft;
+    }
+
+    public Integer getTitleMarginTop() {
+        return titleMarginTop;
+    }
+
+    public Integer getTitleMarginRight() {
+        return titleMarginRight;
+    }
+
+    public Integer getTitleMarginBottom() {
+        return titleMarginBottom;
+    }
+
+    public Integer getMessageMarginLeft() {
+        return messageMarginLeft;
+    }
+
+    public Integer getMessageMarginTop() {
+        return messageMarginTop;
+    }
+
+    public Integer getMessageMarginRight() {
+        return messageMarginRight;
+    }
+
+    public Integer getMessageMarginBottom() {
+        return messageMarginBottom;
+    }
+
+    public Integer getActionButtonMarginLeft() {
+        return actionButtonMarginLeft;
+    }
+
+    public Integer getActionButtonMarginTop() {
+        return actionButtonMarginTop;
+    }
+
+    public Integer getActionButtonMarginRight() {
+        return actionButtonMarginRight;
+    }
+
+    public Integer getActionButtonMarginBottom() {
+        return actionButtonMarginBottom;
+    }
 
     public static class Builder {
 

@@ -125,6 +125,66 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         return duration;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Integer getTitleColor() {
+        return titleColor;
+    }
+
+    public Integer getMessageColor() {
+        return messageColor;
+    }
+
+    public Integer getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public boolean isTitleBold() {
+        return isTitleBold;
+    }
+
+    public boolean isMessageBold() {
+        return isMessageBold;
+    }
+
+    public Integer getTitleMarginLeft() {
+        return titleMarginLeft;
+    }
+
+    public Integer getTitleMarginTop() {
+        return titleMarginTop;
+    }
+
+    public Integer getTitleMarginRight() {
+        return titleMarginRight;
+    }
+
+    public Integer getTitleMarginBottom() {
+        return titleMarginBottom;
+    }
+
+    public Integer getMessageMarginLeft() {
+        return messageMarginLeft;
+    }
+
+    public Integer getMessageMarginTop() {
+        return messageMarginTop;
+    }
+
+    public Integer getMessageMarginRight() {
+        return messageMarginRight;
+    }
+
+    public Integer getMessageMarginBottom() {
+        return messageMarginBottom;
+    }
+
     public static class Builder {
 
         private String title;
