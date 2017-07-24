@@ -10,44 +10,46 @@ import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 public class SnackbarWorker extends Thread implements SnackbarView.Callback {
 
-    private SnackbarView snackbarView;
-    private Semaphore semaphore;
-    private Handler handler;
+    private SnackbarView mSnackbarView;
+    private Semaphore mSemaphore;
+    private Handler mHandler;
 
     public SnackbarWorker(SnackbarView snackbarView, Semaphore semaphore, Handler handler) {
-        this.snackbarView = snackbarView;
-        this.semaphore = semaphore;
-        this.handler = handler;
-        snackbarView.setCallback(this);
+        mSnackbarView = snackbarView;
+        mSemaphore = semaphore;
+        mHandler = handler;
+        mSnackbarView.setCallback(this);
     }
 
     @Override
     public void run() {
         try {
-            semaphore.acquire();
+            mSemaphore.acquire();
             createMessage(SnackbarManager.MSG_SHOW);
-            if (snackbarView.getDuration() != null && snackbarView.getDuration() > 0) {
-                Thread.sleep(snackbarView.getDuration());
+            if (mSnackbarView.getDuration() != null && mSnackbarView.getDuration() > 0) {
+                Thread.sleep(mSnackbarView.getDuration());
                 createMessage(SnackbarManager.MSG_DISMISS);
-                semaphore.release();
+                mSemaphore.release();
             }
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            mSemaphore.release();
+        }finally {
+            mSemaphore.release();
         }
     }
 
     @Override
     public void onDismiss() {
         createMessage(SnackbarManager.MSG_DISMISS);
-        semaphore.release();
+        mSemaphore.release();
     }
 
 
     private Message createMessage(int what) {
-        Message message = handler.obtainMessage();
+        Message message = mHandler.obtainMessage();
         message.what = what;
-        message.obj = snackbarView;
+        message.obj = mSnackbarView;
         message.sendToTarget();
         return message;
     }

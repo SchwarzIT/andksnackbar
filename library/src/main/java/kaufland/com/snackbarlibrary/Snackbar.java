@@ -21,21 +21,21 @@ import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 public class Snackbar {
 
-    private FrameLayout rootLayout;
-    private WindowManager windowManager;
-    private Context applicationContext;
-    private LayoutInflater inflater;
-    private RecyclerView snackbarRecycler;
-    private SnackbarAdapter snackbarAdapter;
-    private SnackbarConfiguration snackbarConfiguration;
+    private FrameLayout mRootLayout;
+    private WindowManager mWindowManager;
+    private Context mApplicationContext;
+    private LayoutInflater mInflater;
+    private RecyclerView mSnackbarRecycler;
+    private SnackbarAdapter mSnackbarAdapter;
+    private SnackbarConfiguration mSnackbarConfiguration;
 
 
     public Snackbar(@NonNull final Context applicationContext, @NonNull SnackbarConfiguration configuration) {
-        this.applicationContext = applicationContext;
-        this.snackbarConfiguration = configuration;
-        this.windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
-        inflater = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        snackbarAdapter = new SnackbarAdapter();
+        mApplicationContext = applicationContext;
+        mSnackbarConfiguration = configuration;
+        mWindowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+        mInflater = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mSnackbarAdapter = new SnackbarAdapter();
 
     }
 
@@ -45,7 +45,7 @@ public class Snackbar {
         layoutParams.format = PixelFormat.TRANSLUCENT;
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        int gravity = snackbarConfiguration.getGravity().equals(SnackbarConfiguration.Gravity.GRAVITY_TOP) ? Gravity.TOP : Gravity.BOTTOM;
+        int gravity = mSnackbarConfiguration.getGravity().equals(SnackbarConfiguration.Gravity.GRAVITY_TOP) ? Gravity.TOP : Gravity.BOTTOM;
         layoutParams.gravity = GravityCompat.getAbsoluteGravity(gravity, ViewCompat.LAYOUT_DIRECTION_LTR);
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
         layoutParams.token = windowToken;
@@ -55,45 +55,45 @@ public class Snackbar {
 
     public void show() {
 
-        if (rootLayout == null) {
+        if (mRootLayout == null) {
             WindowManager.LayoutParams layoutParams = createDefaultLayoutParams(WindowManager.LayoutParams.TYPE_TOAST, null);
-            rootLayout = new FrameLayout(applicationContext) {
+            mRootLayout = new FrameLayout(mApplicationContext) {
                 @Override
                 protected void onAttachedToWindow() {
                     super.onAttachedToWindow();
                     onRootViewAvailable(this);
                 }
             };
-            windowManager.addView(rootLayout, layoutParams);
+            mWindowManager.addView(mRootLayout, layoutParams);
         }
     }
 
     private void onRootViewAvailable(final FrameLayout rootView) {
 
-        View recyclerParent = inflater.from(rootView.getContext()).inflate(R.layout.view_snackbar, null);
-        snackbarRecycler = (RecyclerView) recyclerParent.findViewById(R.id.snackbar_recycler);
+        View recyclerParent = mInflater.from(rootView.getContext()).inflate(R.layout.view_snackbar, null);
+        mSnackbarRecycler = (RecyclerView) recyclerParent.findViewById(R.id.snackbar_recycler);
         LinearLayoutManager manager = new LinearLayoutManager(rootView.getContext());
-        snackbarRecycler.setLayoutManager(manager);
-        rootView.addView(recyclerParent, snackbarRecycler.getLayoutParams());
-        snackbarRecycler.setAdapter(snackbarAdapter);
+        mSnackbarRecycler.setLayoutManager(manager);
+        rootView.addView(recyclerParent, mSnackbarRecycler.getLayoutParams());
+        mSnackbarRecycler.setAdapter(mSnackbarAdapter);
     }
 
     public void addSnackbarView(SnackbarView snackbarView) {
         if (snackbarView != null) {
             show();
-            snackbarAdapter.addItem(snackbarView);
+            mSnackbarAdapter.addItem(snackbarView);
         }
     }
 
     public void removeSnackbarView(SnackbarView snackbarView) {
 
         if (snackbarView != null) {
-            snackbarAdapter.removeItem(snackbarView);
+            mSnackbarAdapter.removeItem(snackbarView);
         }
 
-        if (snackbarAdapter.isEmpty()) {
-            windowManager.removeView(rootLayout);
-            rootLayout = null;
+        if (mSnackbarAdapter.isEmpty()) {
+            mWindowManager.removeView(mRootLayout);
+            mRootLayout = null;
         }
     }
 }
