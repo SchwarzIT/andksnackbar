@@ -257,6 +257,12 @@ public class DefaultSnackbarView extends SnackbarView {
         return actionButtonMarginBottom;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+
     public static class Builder {
 
         private String title;

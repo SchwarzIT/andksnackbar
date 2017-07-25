@@ -8,12 +8,8 @@ import org.mockito.Mockito;
 
 import kaufland.com.snackbarlibrary.R;
 
-/**
- * Created by vkos2006 on 7/24/17.
- */
 
-
-public class DefaultSnackbarViewTest {
+public class DefaultSnackbarViewBuilderTest {
 
     private DefaultSnackbarView.Builder mDefaultSnackbarViewBuilder;
 
