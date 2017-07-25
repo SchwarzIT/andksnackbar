@@ -44,7 +44,7 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
     }
 
 
-    private Message createMessage(int what) {
+    public Message createMessage(int what) {
         Message message = mHandler.obtainMessage();
         message.what = what;
         message.obj = mSnackbarView;
