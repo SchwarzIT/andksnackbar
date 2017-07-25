@@ -58,6 +58,7 @@ public class SnackbarAdapterTest {
         PowerMockito.whenNew(SnackbarAdapter.ViewHolder.class).withAnyArguments().thenReturn(mViewHolder);
         mAdapter.onCreateViewHolder(null, 0);
         mAdapter.onBindViewHolder(mViewHolder,0);
+        Mockito.verify(viewMock, Mockito.times(1)).onBindView();
     }
 
     @Test
