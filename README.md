@@ -34,7 +34,7 @@ is an Android library for creating highly customisable Snackbars which persist a
     compile 'com.github.Kaufland:andksnackbar:0.0.1'
     ```
     
-3. Configure SnackbarManager in your Application's ``` java onCreate(Bundle savedInstanceState) ``` method
+3. Configure SnackbarManager in your Application's ```onCreate(Bundle savedInstanceState)``` method
 
     ``` java
     SnackbarManager.init(getApplicationContext(),SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
