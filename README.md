@@ -3,13 +3,16 @@
 [![KIS](https://img.shields.io/badge/KIS-awesome-red.svg)](http://www.spannende-it.de)
 
 # andksnackbar
-is an Android library for creating highly customisable Snackbars which persist among Activity changes. It provides possibility of managing multiple or single Snackbar(s) at a time.
+is an Android library for creating highly customisable Snackbars which persist among Activity changes.
 
 ## Demo
 
 
 ## Features 
 
+* Provides possibility for managing single/multiple Snackbars depending on SnackbarManager's init method.
+* Provides SnackbarView Builders with many customisable attributes.
+* You can create your own snackbar views by extending SnackbarView class and overriding its methods.
 
 ## Implementation
 
@@ -31,7 +34,7 @@ is an Android library for creating highly customisable Snackbars which persist a
     compile 'com.github.Kaufland:andksnackbar:0.0.1'
     ```
     
-3. Configure SnackbarManager in your Application's onCreate method
+3. Configure SnackbarManager in your Application's ``` java onCreate(Bundle savedInstanceState) ``` method
 
     ``` java
     SnackbarManager.init(getApplicationContext(),SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
