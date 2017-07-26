@@ -10,7 +10,8 @@ is an Android library for creating highly customisable Snackbars which persist a
 ## Features 
 
 * Provides possibility for managing single/multiple Snackbars depending on SnackbarManager's init method.
-* Provides SnackbarView Builders with many customisable attributes.
+* Provides possibility to change Snackbar's gravity (TOP/BOTTOM) depending on SnackbarManager's init method.
+* Provides SnackbarView Builders with many customisable attributes (DefaultSnackbarView.Builder , ActionSnackbarView.Builder).
 * You can create your own snackbar views by extending SnackbarView class and overriding its methods.
 
 ## Implementation
