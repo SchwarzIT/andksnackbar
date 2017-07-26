@@ -6,7 +6,8 @@
 is an Android library for creating highly customisable Snackbars which persist among Activity changes.
 
 ## Demo
-![](https://media.giphy.com/media/xUPGGDK2jNGLuOCsDK/giphy.gif)
+![Image](snackbar.gif)
+
 ## Features 
 
 * Provides possibility for managing single/multiple Snackbars depending on SnackbarManager's init method.
