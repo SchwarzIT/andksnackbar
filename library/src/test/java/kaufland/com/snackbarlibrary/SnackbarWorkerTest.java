@@ -49,7 +49,7 @@ public class SnackbarWorkerTest {
     }
 
     @Test
-    public void testMessageShowCreated() throws InterruptedException {
+    public void testMessageShowCalled() throws InterruptedException {
         Message messageShow = new Message();
         messageShow.what = SnackbarManager.MSG_SHOW;
         messageShow.obj = mSnackbarView;
@@ -60,7 +60,7 @@ public class SnackbarWorkerTest {
     }
 
     @Test
-    public void testMessageDismissCreated() throws InterruptedException {
+    public void testMessageDismissCalled() throws InterruptedException {
         Message messageShow = new Message();
         messageShow.what = SnackbarManager.MSG_SHOW;
         messageShow.obj = mSnackbarView;
@@ -78,7 +78,23 @@ public class SnackbarWorkerTest {
         Mockito.verify(mSnackbarWorker, Mockito.times(1)).createMessage(SnackbarManager.MSG_DISMISS);
     }
 
+    @Test
+    public void testMessageShowCalledDismissNotCalled() throws InterruptedException{
 
+        Message messageShow = new Message();
+        messageShow.what = SnackbarManager.MSG_SHOW;
+        messageShow.obj = mSnackbarView;
 
+        Message messageDismiss = new Message();
+        messageShow.what = SnackbarManager.MSG_DISMISS;
+        messageShow.obj = mSnackbarView;
 
+        PowerMockito.doReturn(messageShow).when(mSnackbarWorker).createMessage(SnackbarManager.MSG_SHOW);
+        PowerMockito.doReturn(messageDismiss).when(mSnackbarWorker).createMessage(SnackbarManager.MSG_DISMISS);
+        PowerMockito.doReturn(null).when(mSnackbarView).getDuration();
+        mSnackbarWorker.start();
+        mSnackbarWorker.join();
+        Mockito.verify(mSnackbarWorker, Mockito.times(1)).createMessage(SnackbarManager.MSG_SHOW);
+        Mockito.verify(mSnackbarWorker, Mockito.times(0)).createMessage(SnackbarManager.MSG_DISMISS);
+    }
 }

@@ -2,23 +2,25 @@ package kaufland.com.snackbarlibrary.view;
 
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import kaufland.com.snackbarlibrary.R;
 import kaufland.com.snackbarlibrary.utils.ViewUtils;
 
-
-public class SnackbarViewWithTitleAndMessage extends SnackbarView {
+public class ActionSnackbarView extends SnackbarView {
 
     private View view;
     private TextView mTitle;
     private TextView mMessage;
+    private ImageButton mActionButton;
 
     private String title;
     private String message;
@@ -26,6 +28,8 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
     private Integer messageColor;
     private Integer backgroundColor;
     private Integer duration;
+    private ActionListener actionListener;
+    private Integer drawable;
 
     private boolean isTitleBold;
     private boolean isMessageBold;
@@ -38,14 +42,21 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
     private Integer messageMarginTop;
     private Integer messageMarginRight;
     private Integer messageMarginBottom;
+    private Integer actionButtonMarginLeft;
+    private Integer actionButtonMarginTop;
+    private Integer actionButtonMarginRight;
+    private Integer actionButtonMarginBottom;
 
-    public SnackbarViewWithTitleAndMessage(Builder builder) {
+
+    private ActionSnackbarView(Builder builder) {
         title = builder.title;
         message = builder.message;
         titleColor = builder.titleColor;
         messageColor = builder.messageColor;
         backgroundColor = builder.backgroundColor;
         duration = builder.duration;
+        actionListener = builder.actionListener;
+        drawable = builder.drawable;
         isTitleBold = builder.isTitleBold;
         isMessageBold = builder.isMessageBold;
         titleMarginLeft = builder.titleMarginLeft;
@@ -56,19 +67,19 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         messageMarginTop = builder.messageMarginTop;
         messageMarginRight = builder.messageMarginRight;
         messageMarginBottom = builder.messageMarginBottom;
+        actionButtonMarginLeft = builder.actionButtonMarginLeft;
+        actionButtonMarginTop = builder.actionButtonMarginTop;
+        actionButtonMarginRight = builder.actionButtonMarginRight;
+        actionButtonMarginBottom = builder.actionButtonMarginBottom;
     }
 
-    @Override
-    public View onCreateView(ViewGroup parent) {
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_snakbar_item_with_title_and_message, parent, false);
-        mTitle = (TextView) view.findViewById(R.id.text_view_title);
-        mMessage = (TextView) view.findViewById(R.id.text_view_message);
+
+    public View getView() {
         return view;
     }
 
     @Override
     public void onBindView() {
-
         if (title != null) {
             mTitle.setText(title);
         }
@@ -97,6 +108,10 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
         }
 
+        if (drawable != null) {
+            mActionButton.setImageDrawable(ContextCompat.getDrawable(view.getContext(), drawable));
+        }
+
         if (titleMarginLeft != null && titleMarginRight != null && titleMarginTop != null && titleMarginBottom != null) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
             int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(), titleMarginLeft);
@@ -118,6 +133,30 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             mMessage.setLayoutParams(layoutParams);
         }
 
+        if (actionButtonMarginLeft != null && actionButtonMarginRight != null && actionButtonMarginTop != null && actionButtonMarginBottom != null) {
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mActionButton.getLayoutParams();
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(), actionButtonMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(), actionButtonMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(), actionButtonMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(), actionButtonMarginBottom);
+            layoutParams.setMargins(marginLeftPx, marginTopPx, marginRightPx, marginBottomPx);
+            mActionButton.setLayoutParams(layoutParams);
+        }
+
+        if (actionListener != null) {
+            mActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean shouldDismiss = actionListener.onAction();
+
+                    if (shouldDismiss) {
+                        if (getCallback() != null) {
+                            getCallback().onDismiss();
+                        }
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -125,12 +164,17 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         return duration;
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    public View onCreateView(ViewGroup parent) {
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_default_snakbar_item, parent, false);
+        mTitle = (TextView) view.findViewById(R.id.text_view_title);
+        mMessage = (TextView) view.findViewById(R.id.text_view_message);
+        mActionButton = (ImageButton) view.findViewById(R.id.button_action);
+        return view;
     }
 
-    public String getMessage() {
-        return message;
+    public Integer getBackgroundColor() {
+        return backgroundColor;
     }
 
     public Integer getTitleColor() {
@@ -141,8 +185,20 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         return messageColor;
     }
 
-    public Integer getBackgroundColor() {
-        return backgroundColor;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ActionListener getActionListener() {
+        return actionListener;
+    }
+
+    public Integer getDrawable() {
+        return drawable;
     }
 
     public boolean isTitleBold() {
@@ -185,6 +241,28 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         return messageMarginBottom;
     }
 
+    public Integer getActionButtonMarginLeft() {
+        return actionButtonMarginLeft;
+    }
+
+    public Integer getActionButtonMarginTop() {
+        return actionButtonMarginTop;
+    }
+
+    public Integer getActionButtonMarginRight() {
+        return actionButtonMarginRight;
+    }
+
+    public Integer getActionButtonMarginBottom() {
+        return actionButtonMarginBottom;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+
     public static class Builder {
 
         private String title;
@@ -193,6 +271,8 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         private Integer messageColor;
         private Integer backgroundColor;
         private Integer duration;
+        private ActionListener actionListener;
+        private Integer drawable;
         private boolean isTitleBold;
         private boolean isMessageBold;
         private Integer titleMarginLeft;
@@ -203,6 +283,10 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
         private Integer messageMarginTop;
         private Integer messageMarginRight;
         private Integer messageMarginBottom;
+        private Integer actionButtonMarginLeft;
+        private Integer actionButtonMarginTop;
+        private Integer actionButtonMarginRight;
+        private Integer actionButtonMarginBottom;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
@@ -220,6 +304,11 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             return this;
         }
 
+        public Builder withBoldTitleStyle() {
+            isTitleBold = true;
+            return this;
+        }
+
         public Builder withMarginsAroundTitle(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom) {
             titleMarginLeft = left;
             titleMarginTop = top;
@@ -227,6 +316,12 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             titleMarginBottom = bottom;
             return this;
         }
+
+        public Builder withBoldMessageStyle() {
+            isMessageBold = true;
+            return this;
+        }
+
 
         public Builder withMessage(@NonNull String message) {
             this.message = message;
@@ -251,20 +346,26 @@ public class SnackbarViewWithTitleAndMessage extends SnackbarView {
             return this;
         }
 
-
-        public Builder withBoldTitleStyle() {
-            isTitleBold = true;
+        public Builder withActionListener(ActionListener actionListener) {
+            this.actionListener = actionListener;
             return this;
         }
 
-        public Builder withBoldMessageStyle() {
-            isMessageBold = true;
+        public Builder withActionDrawable(@DrawableRes Integer drawable) {
+            this.drawable = drawable;
             return this;
         }
 
+        public Builder withMarginsAroundActionButton(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom) {
+            actionButtonMarginLeft = left;
+            actionButtonMarginTop = top;
+            actionButtonMarginRight = right;
+            actionButtonMarginBottom = bottom;
+            return this;
+        }
 
         public SnackbarView build() {
-            return new SnackbarViewWithTitleAndMessage(this);
+            return new ActionSnackbarView(this);
         }
     }
 
