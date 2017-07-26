@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'android-apt'
+apply plugin: 'maven'
+apply plugin: 'jacoco'
+apply plugin: 'pmd'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -26,7 +30,58 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url uri('libs') }
+        jcenter()
+
+    }
+    dependencies {
+        // replace with the current version of the android-apt plugin
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+apt {
+    arguments {
+        library 'true'
+        androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.0'
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest', group: 'verification') {
+
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
