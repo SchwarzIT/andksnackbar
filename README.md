@@ -7,6 +7,7 @@ is an Android library for creating highly customisable Snackbars which persist a
 
 ## Demo
 
+![](https://picload.org/view/rwgicarw/ezgif.com-crop.gif.html)
 
 ## Features 
 
