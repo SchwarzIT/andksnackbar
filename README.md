@@ -33,19 +33,16 @@ is an Android library for creating highly customisable Snackbars which persist a
     
 3. Configure SnackbarManager in your Application's onCreate method
 
-	``` java
-
-SnackbarManager.init(getApplicationContext(),SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
-                .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
-                .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)));
-                
-	```
+    ``` java
+    SnackbarManager.init(getApplicationContext(),SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
+                   .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
+                   .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)));     
+    ```
     
 4. Create Snackbars whenever you need them
 
-``` java
-
-SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
+    ``` java
+    SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
                         .withBackgroundColor(R.color.colorGreen)
                         .withTitle("Example default title")
                         .withTitleColor(R.color.colorWhite)
@@ -64,7 +61,6 @@ SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
                         .withMarginsAroundTitle(16,16,16,0)
                         .withMarginsAroundMessage(16,16,16,16)
                         .withMarginsAroundActionButton(10,10,10,10)
-                        .build());
-                
+                        .build());    
 	```
 
