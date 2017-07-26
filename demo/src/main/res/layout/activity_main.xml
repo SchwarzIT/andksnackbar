@@ -28,7 +28,7 @@
             android:background="@color/colorPrimary"
             android:layout_marginBottom="@dimen/default_vertical_margin"
             android:textStyle="bold"
-            android:text="Create Text Snackbar" />
+            android:text="Create Action Snackbar" />
 
         <Button
             android:id="@+id/create_snackbar_button"
