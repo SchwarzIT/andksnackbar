@@ -10,9 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/default_horizontal_margin"
-        android:layout_marginRight="@dimen/default_horizontal_margin"
-        android:layout_marginTop="@dimen/default_vertical_margin"
         android:textColor="@android:color/black" />
 
     <TextView
@@ -20,19 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_view_title"
-        android:layout_marginLeft="@dimen/default_horizontal_margin"
-        android:layout_marginRight="@dimen/default_horizontal_margin"
-        android:layout_marginBottom="@dimen/default_vertical_margin"
         android:textColor="@android:color/black" />
-
-    <ImageButton
-        android:id="@+id/button_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/default_horizontal_margin"
-        android:layout_marginTop="@dimen/default_vertical_margin"
-        android:layout_marginBottom="@dimen/default_vertical_margin"/>
 
 </RelativeLayout>

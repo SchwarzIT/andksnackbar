@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
                         .withTitle("Example default title")
                         .withTitleColor(R.color.colorWhite)
                         .withBoldTitleStyle()
+                        .withTitleTextSize(16)
                         .withMarginsAroundTitle(16,16,16,0)
                         .withMessage("Example default message")
                         .withMessageColor(R.color.colorWhite)
                         .withBoldMessageStyle()
+                        .withMessageTextSize(10)
                         .withMarginsAroundMessage(16,16,16,16)
                         .withDuration(2500)
                         .build());
@@ -54,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
                         .withTitle("Example title")
                         .withTitleColor(R.color.colorWhite)
                         .withBoldTitleStyle()
+                        .withTitleTextSize(16)
                         .withMessage("Example message")
                         .withMessageColor(R.color.colorWhite)
                         .withBoldMessageStyle()
+                        .withMessageTextSize(10)
                         .withActionDrawable(R.mipmap.ic_launcher)
                         .withActionListener(new ActionListener() {
                             @Override

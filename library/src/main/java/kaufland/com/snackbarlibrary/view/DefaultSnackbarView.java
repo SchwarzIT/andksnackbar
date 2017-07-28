@@ -1,8 +1,10 @@
 package kaufland.com.snackbarlibrary.view;
 
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,10 @@ public class DefaultSnackbarView extends SnackbarView {
     private Integer messageMarginTop;
     private Integer messageMarginRight;
     private Integer messageMarginBottom;
+    private Integer titleTextSize;
+    private Integer messageTextSize;
+    private Integer titleStyle;
+    private Integer messageStyle;
 
     public DefaultSnackbarView(Builder builder) {
         title = builder.title;
@@ -56,11 +62,15 @@ public class DefaultSnackbarView extends SnackbarView {
         messageMarginTop = builder.messageMarginTop;
         messageMarginRight = builder.messageMarginRight;
         messageMarginBottom = builder.messageMarginBottom;
+        titleTextSize = builder.titleTextSize;
+        messageTextSize = builder.messageTextSize;
+        titleStyle = builder.titleStyle;
+        messageStyle = builder.messageStyle;
     }
 
     @Override
     public View onCreateView(ViewGroup parent) {
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_snakbar_item_with_title_and_message, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_default_snakbar_item, parent, false);
         mTitle = (TextView) view.findViewById(R.id.text_view_title);
         mMessage = (TextView) view.findViewById(R.id.text_view_message);
         return view;
@@ -71,10 +81,14 @@ public class DefaultSnackbarView extends SnackbarView {
 
         if (title != null) {
             mTitle.setText(title);
+        } else {
+            mTitle.setVisibility(View.GONE);
         }
 
         if (message != null) {
             mMessage.setText(message);
+        } else {
+            mMessage.setVisibility(View.GONE);
         }
 
         if (titleColor != null) {
@@ -116,6 +130,32 @@ public class DefaultSnackbarView extends SnackbarView {
             int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(), messageMarginBottom);
             layoutParams.setMargins(marginLeftPx, marginTopPx, marginRightPx, marginBottomPx);
             mMessage.setLayoutParams(layoutParams);
+        }
+
+        if (titleTextSize != null) {
+            mTitle.setTextSize(titleTextSize);
+        }
+
+        if (messageTextSize != null) {
+            mMessage.setTextSize(messageTextSize);
+        }
+
+        if (titleStyle != null) {
+            if (Build.VERSION.SDK_INT < 23) {
+                mTitle.setTextAppearance(view.getContext(), titleStyle);
+            } else {
+                mTitle.setTextAppearance(titleStyle);
+            }
+
+        }
+
+        if (messageStyle != null) {
+            if (Build.VERSION.SDK_INT < 23) {
+                mMessage.setTextAppearance(view.getContext(), messageStyle);
+            } else {
+                mTitle.setTextAppearance(messageStyle);
+            }
+
         }
 
     }
@@ -185,6 +225,22 @@ public class DefaultSnackbarView extends SnackbarView {
         return messageMarginBottom;
     }
 
+    public Integer getTitleTextSize() {
+        return titleTextSize;
+    }
+
+    public Integer getMessageTextSize() {
+        return messageTextSize;
+    }
+
+    public Integer getTitleStyle() {
+        return titleStyle;
+    }
+
+    public Integer getMessageStyle() {
+        return messageStyle;
+    }
+
     public static class Builder {
 
         private String title;
@@ -203,6 +259,10 @@ public class DefaultSnackbarView extends SnackbarView {
         private Integer messageMarginTop;
         private Integer messageMarginRight;
         private Integer messageMarginBottom;
+        private Integer titleTextSize;
+        private Integer messageTextSize;
+        private Integer titleStyle;
+        private Integer messageStyle;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
@@ -228,6 +288,11 @@ public class DefaultSnackbarView extends SnackbarView {
             return this;
         }
 
+        public Builder withTitleTextSize(Integer titleTextSize) {
+            this.titleTextSize = titleTextSize;
+            return this;
+        }
+
         public Builder withMessage(@NonNull String message) {
             this.message = message;
             return this;
@@ -243,6 +308,21 @@ public class DefaultSnackbarView extends SnackbarView {
             messageMarginTop = top;
             messageMarginRight = right;
             messageMarginBottom = bottom;
+            return this;
+        }
+
+        public Builder withMessageTextSize(Integer messageTextSize) {
+            this.messageTextSize = messageTextSize;
+            return this;
+        }
+
+        public Builder withTitleStyle(@StyleRes Integer titleStyle) {
+            this.titleStyle = titleStyle;
+            return this;
+        }
+
+        public Builder withMessageStyle(@StyleRes Integer messageStyle) {
+            this.messageStyle = messageStyle;
             return this;
         }
 
