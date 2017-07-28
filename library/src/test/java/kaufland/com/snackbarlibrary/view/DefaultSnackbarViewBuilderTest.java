@@ -93,6 +93,36 @@ public class DefaultSnackbarViewBuilderTest {
         Assert.assertTrue(defaultSnackbarView.isMessageBold());
     }
 
+    @Test
+    public void testTitleSize(){
+
+        mSnackbarViewWithTitleAndMessageBuilder.withTitleTextSize(10);
+        DefaultSnackbarView actionSnackbarView = (DefaultSnackbarView) mSnackbarViewWithTitleAndMessageBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getTitleTextSize(),new Integer(10));
+    }
+
+    @Test
+    public void testMessageSize(){
+
+        mSnackbarViewWithTitleAndMessageBuilder.withMessageTextSize(10);
+        DefaultSnackbarView actionSnackbarView = (DefaultSnackbarView) mSnackbarViewWithTitleAndMessageBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getMessageTextSize(),new Integer(10));
+    }
+    @Test
+    public void testTitleStyle(){
+        mSnackbarViewWithTitleAndMessageBuilder.withTitleStyle(R.style.TextAppearance_AppCompat_Light_SearchResult_Title);
+        DefaultSnackbarView actionSnackbarView = (DefaultSnackbarView) mSnackbarViewWithTitleAndMessageBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getTitleStyle(),new Integer(R.style.TextAppearance_AppCompat_Light_SearchResult_Title));
+    }
+
+    @Test
+    public void testMessageStyle(){
+        mSnackbarViewWithTitleAndMessageBuilder.withMessageStyle(R.style.TextAppearance_AppCompat_Light_SearchResult_Title);
+        DefaultSnackbarView actionSnackbarView = (DefaultSnackbarView) mSnackbarViewWithTitleAndMessageBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getMessageStyle(),new Integer(R.style.TextAppearance_AppCompat_Light_SearchResult_Title));
+    }
+
+
 
     @Test
     public void testTitleMargins(){

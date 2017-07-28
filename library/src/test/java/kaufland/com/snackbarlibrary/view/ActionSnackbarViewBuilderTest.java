@@ -98,6 +98,38 @@ public class ActionSnackbarViewBuilderTest {
     }
 
     @Test
+    public void testTitleSize(){
+
+        mDefaultSnackbarViewBuilder.withTitleTextSize(10);
+        ActionSnackbarView actionSnackbarView = (ActionSnackbarView) mDefaultSnackbarViewBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getTitleTextSize(),new Integer(10));
+    }
+
+    @Test
+    public void testMessageSize(){
+
+        mDefaultSnackbarViewBuilder.withMessageTextSize(10);
+        ActionSnackbarView actionSnackbarView = (ActionSnackbarView) mDefaultSnackbarViewBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getMessageTextSize(),new Integer(10));
+    }
+
+    @Test
+    public void testTitleStyle(){
+        mDefaultSnackbarViewBuilder.withTitleStyle(R.style.TextAppearance_AppCompat_Light_SearchResult_Title);
+        ActionSnackbarView actionSnackbarView = (ActionSnackbarView) mDefaultSnackbarViewBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getTitleStyle(),new Integer(R.style.TextAppearance_AppCompat_Light_SearchResult_Title));
+    }
+
+    @Test
+    public void testMessageStyle(){
+        mDefaultSnackbarViewBuilder.withMessageStyle(R.style.TextAppearance_AppCompat_Light_SearchResult_Title);
+        ActionSnackbarView actionSnackbarView = (ActionSnackbarView) mDefaultSnackbarViewBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getMessageStyle(),new Integer(R.style.TextAppearance_AppCompat_Light_SearchResult_Title));
+    }
+
+
+
+    @Test
     public void testMessageBold(){
 
         mDefaultSnackbarViewBuilder.withBoldMessageStyle();
