@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 SnackbarManager.showSnackbar(new DefaultSnackbarView.Builder()
-                        .withBackgroundColor(R.color.colorRed)
+                        .withBackgroundColor(R.color.colorGreen)
                         .withTitle("Example default title")
                         .withTitleColor(R.color.colorWhite)
                         .withBoldTitleStyle()
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
-                        .withBackgroundColor(R.color.colorGreen)
+                        .withBackgroundColor(R.color.colorRed)
                         .withTitle("Example title")
                         .withTitleColor(R.color.colorWhite)
                         .withBoldTitleStyle()
