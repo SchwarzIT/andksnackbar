@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,7 +20,8 @@ import kaufland.com.snackbarlibrary.utils.ViewUtils;
 
 public class ActionSnackbarView extends SnackbarView {
 
-    private View view;
+    private FrameLayout view;
+    private RelativeLayout parentLayout;
     private TextView mTitle;
     private TextView mMessage;
     private ImageButton mActionButton;
@@ -52,6 +54,7 @@ public class ActionSnackbarView extends SnackbarView {
     private Integer messageTextSize;
     private Integer titleStyle;
     private Integer messageStyle;
+    private Integer elevation;
 
 
     private ActionSnackbarView(Builder builder) {
@@ -77,10 +80,11 @@ public class ActionSnackbarView extends SnackbarView {
         actionButtonMarginTop = builder.actionButtonMarginTop;
         actionButtonMarginRight = builder.actionButtonMarginRight;
         actionButtonMarginBottom = builder.actionButtonMarginBottom;
-        titleTextSize=builder.titleTextSize;
-        messageTextSize=builder.messageTextSize;
-        titleStyle=builder.titleStyle;
-        messageStyle=builder.messageStyle;
+        titleTextSize = builder.titleTextSize;
+        messageTextSize = builder.messageTextSize;
+        titleStyle = builder.titleStyle;
+        messageStyle = builder.messageStyle;
+        elevation = builder.elevation;
     }
 
 
@@ -115,7 +119,7 @@ public class ActionSnackbarView extends SnackbarView {
         }
 
         if (backgroundColor != null) {
-            view.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
+            parentLayout.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
         }
 
         if (drawable != null) {
@@ -168,30 +172,37 @@ public class ActionSnackbarView extends SnackbarView {
             });
         }
 
-        if(titleTextSize!=null){
+        if (titleTextSize != null) {
             mTitle.setTextSize(titleTextSize);
         }
 
-        if(messageTextSize!=null){
+        if (messageTextSize != null) {
             mMessage.setTextSize(messageTextSize);
         }
 
-        if(titleStyle!=null){
-            if(Build.VERSION.SDK_INT < 23){
-                mTitle.setTextAppearance(view.getContext(),titleStyle);
-            }else{
+        if (titleStyle != null) {
+            if (Build.VERSION.SDK_INT < 23) {
+                mTitle.setTextAppearance(view.getContext(), titleStyle);
+            } else {
                 mTitle.setTextAppearance(titleStyle);
             }
 
         }
 
-        if(messageStyle!=null){
-            if(Build.VERSION.SDK_INT < 23){
-                mMessage.setTextAppearance(view.getContext(),messageStyle);
-            }else{
+        if (messageStyle != null) {
+            if (Build.VERSION.SDK_INT < 23) {
+                mMessage.setTextAppearance(view.getContext(), messageStyle);
+            } else {
                 mTitle.setTextAppearance(messageStyle);
             }
 
+        }
+
+        if (elevation != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            view.setClipToPadding(false);
+            view.setPadding(0, 0, 0, ViewUtils.convertDpToPixel(view.getContext(), elevation));
+            parentLayout.setElevation(ViewUtils.convertDpToPixel(view.getContext(), elevation));
         }
 
 
@@ -204,7 +215,8 @@ public class ActionSnackbarView extends SnackbarView {
 
     @Override
     public View onCreateView(ViewGroup parent) {
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_action_snakbar_item, parent, false);
+        view = (FrameLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_action_snakbar_item, parent, false);
+        parentLayout = (RelativeLayout) view.findViewById(R.id.view_snackbar_item_parent);
         mTitle = (TextView) view.findViewById(R.id.text_view_title);
         mMessage = (TextView) view.findViewById(R.id.text_view_message);
         mActionButton = (ImageButton) view.findViewById(R.id.button_action);
@@ -225,6 +237,10 @@ public class ActionSnackbarView extends SnackbarView {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getMessage() {
@@ -295,10 +311,6 @@ public class ActionSnackbarView extends SnackbarView {
         return actionButtonMarginBottom;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Integer getTitleTextSize() {
         return titleTextSize;
     }
@@ -313,6 +325,10 @@ public class ActionSnackbarView extends SnackbarView {
 
     public Integer getMessageStyle() {
         return messageStyle;
+    }
+
+    public Integer getElevation() {
+        return elevation;
     }
 
     public static class Builder {
@@ -343,6 +359,7 @@ public class ActionSnackbarView extends SnackbarView {
         private Integer messageTextSize;
         private Integer titleStyle;
         private Integer messageStyle;
+        private Integer elevation;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
@@ -373,8 +390,8 @@ public class ActionSnackbarView extends SnackbarView {
             return this;
         }
 
-        public Builder withTitleTextSize(Integer titleTextSize){
-            this.titleTextSize=titleTextSize;
+        public Builder withTitleTextSize(Integer titleTextSize) {
+            this.titleTextSize = titleTextSize;
             return this;
         }
 
@@ -402,8 +419,8 @@ public class ActionSnackbarView extends SnackbarView {
             return this;
         }
 
-        public Builder withMessageTextSize(Integer messageTextSize){
-            this.messageTextSize=messageTextSize;
+        public Builder withMessageTextSize(Integer messageTextSize) {
+            this.messageTextSize = messageTextSize;
             return this;
         }
 
@@ -437,6 +454,11 @@ public class ActionSnackbarView extends SnackbarView {
             actionButtonMarginTop = top;
             actionButtonMarginRight = right;
             actionButtonMarginBottom = bottom;
+            return this;
+        }
+
+        public Builder withElevation(Integer elevation) {
+            this.elevation = elevation;
             return this;
         }
 

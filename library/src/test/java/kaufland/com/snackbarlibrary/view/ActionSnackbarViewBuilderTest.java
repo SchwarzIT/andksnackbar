@@ -139,6 +139,16 @@ public class ActionSnackbarViewBuilderTest {
 
 
     @Test
+    public void testElevation(){
+
+        mDefaultSnackbarViewBuilder.withElevation(6);
+        ActionSnackbarView actionSnackbarView = (ActionSnackbarView) mDefaultSnackbarViewBuilder.build();
+        Assert.assertEquals(actionSnackbarView.getElevation(),new Integer(6));
+    }
+
+
+
+    @Test
     public void testTitleMargins(){
         mDefaultSnackbarViewBuilder.withMarginsAroundTitle(10,20,30,40);
         ActionSnackbarView actionSnackbarView = (ActionSnackbarView) mDefaultSnackbarViewBuilder.build();
