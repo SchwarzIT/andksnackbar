@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         .withMessageTextSize(10)
                         .withMarginsAroundMessage(16,16,16,16)
                         .withDuration(2500)
+                        .withElevation(6)
                         .build());
 
             }
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         .withMarginsAroundTitle(16,16,16,0)
                         .withMarginsAroundMessage(16,16,16,16)
                         .withMarginsAroundActionButton(10,10,10,10)
+                        .withElevation(6)
                         .build());
 
             }
