@@ -32,7 +32,7 @@ is an Android library for creating highly customisable Snackbars which persist a
 2. Add gradle dependency
 
     ```
-    compile 'com.github.Kaufland:andksnackbar:0.0.4'
+    compile 'com.github.Kaufland:andksnackbar:0.0.5'
     ```
     
 3. Configure SnackbarManager in your Application's ```onCreate(Bundle savedInstanceState)``` method
@@ -46,14 +46,16 @@ is an Android library for creating highly customisable Snackbars which persist a
 4. Create Snackbars whenever you need them
 
     ``` java
-    SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
-                        .withBackgroundColor(R.color.colorGreen)
-                        .withTitle("Example default title")
+     SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
+                        .withBackgroundColor(R.color.colorRed)
+                        .withTitle("Example title")
                         .withTitleColor(R.color.colorWhite)
                         .withBoldTitleStyle()
-                        .withMessage("Example default message")
+                        .withTitleTextSize(16)
+                        .withMessage("Example message")
                         .withMessageColor(R.color.colorWhite)
                         .withBoldMessageStyle()
+                        .withMessageTextSize(10)
                         .withActionDrawable(R.mipmap.ic_launcher)
                         .withActionListener(new ActionListener() {
                             @Override
@@ -65,6 +67,7 @@ is an Android library for creating highly customisable Snackbars which persist a
                         .withMarginsAroundTitle(16,16,16,0)
                         .withMarginsAroundMessage(16,16,16,16)
                         .withMarginsAroundActionButton(10,10,10,10)
-                        .build());    
+                        .withElevation(6)
+                        .build());
 	```
 
