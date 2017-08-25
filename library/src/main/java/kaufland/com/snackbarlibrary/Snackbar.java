@@ -47,7 +47,7 @@ public class Snackbar {
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         int gravity = mSnackbarConfiguration.getGravity().equals(SnackbarConfiguration.Gravity.GRAVITY_TOP) ? Gravity.TOP : Gravity.BOTTOM;
         layoutParams.gravity = GravityCompat.getAbsoluteGravity(gravity, ViewCompat.LAYOUT_DIRECTION_LTR);
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_IN_OVERSCAN;
         layoutParams.token = windowToken;
         layoutParams.type = type;
         return layoutParams;
