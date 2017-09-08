@@ -32,7 +32,7 @@ is an Android library for creating highly customisable Snackbars which persist a
 2. Add gradle dependency
 
     ```
-    compile 'com.github.Kaufland:andksnackbar:0.0.5'
+    compile 'com.github.Kaufland:andksnackbar:0.0.6'
     ```
     
 3. Configure SnackbarManager in your Application's ```onCreate(Bundle savedInstanceState)``` method
