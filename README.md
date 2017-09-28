@@ -32,13 +32,13 @@ is an Android library for creating highly customisable Snackbars which persist a
 2. Add gradle dependency
 
     ```
-    compile 'com.github.Kaufland:andksnackbar:0.0.7'
+    compile 'com.github.Kaufland:andksnackbar:0.0.8'
     ```
     
 3. Configure SnackbarManager in your Application's ```onCreate(Bundle savedInstanceState)``` method
 
     ``` java
-    SnackbarManager.init(getApplicationContext(),SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
+    SnackbarManager.init(SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
                    .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
                    .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)));     
     ```
@@ -70,4 +70,5 @@ is an Android library for creating highly customisable Snackbars which persist a
                         .withElevation(6)
                         .build());
 	```
+5. If you want to persist snackbars through Activity changes call ```SnackbarManager.rebindContext(this)``` in your Activities ```onResume()``` method.
 
