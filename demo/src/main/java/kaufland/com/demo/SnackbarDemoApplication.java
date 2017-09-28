@@ -14,7 +14,7 @@ public class SnackbarDemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SnackbarManager.init(getApplicationContext(),SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
+        SnackbarManager.init(SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
                 .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
                 .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)));
     }
