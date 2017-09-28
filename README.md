@@ -70,5 +70,5 @@ is an Android library for creating highly customisable Snackbars which persist a
                         .withElevation(6)
                         .build());
 	```
-5. If you want to persist snackbars through Activity changes call ```SnackbarManager.rebindContext(this)``` in your Activities ```onResume()``` method.
+5. If you want to persist snackbars through Activity changes call ```SnackbarManager.rebindContext(this)``` in your Activities' ```onResume()``` method.
 
