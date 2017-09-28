@@ -1,9 +1,9 @@
 package kaufland.com.demo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +14,7 @@ import kaufland.com.snackbarlibrary.view.ActionSnackbarView;
 import kaufland.com.snackbarlibrary.view.DefaultSnackbarView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
     private Button mCreateDefaultSnackbarButton;
     private Button mCreateActionSnackbarButton;
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                         .withElevation(6)
                         .build());
 
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
 
             }
         });

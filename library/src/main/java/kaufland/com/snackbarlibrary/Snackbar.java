@@ -2,9 +2,7 @@ package kaufland.com.snackbarlibrary;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,24 +21,20 @@ public class Snackbar {
 
     private FrameLayout mRootLayout;
     private WindowManager mWindowManager;
-    private Context mApplicationContext;
+    private Context mContext;
     private LayoutInflater mInflater;
     private RecyclerView mSnackbarRecycler;
     private SnackbarAdapter mSnackbarAdapter;
     private SnackbarConfiguration mSnackbarConfiguration;
 
 
-    public Snackbar(@NonNull final Context applicationContext, @NonNull SnackbarConfiguration configuration) {
-        mApplicationContext = applicationContext;
+    public Snackbar(@NonNull SnackbarConfiguration configuration) {
         mSnackbarConfiguration = configuration;
-        mWindowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
-        mInflater = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mSnackbarAdapter = new SnackbarAdapter();
-
     }
 
 
-    private WindowManager.LayoutParams createDefaultLayoutParams(int type, @Nullable IBinder windowToken) {
+    private WindowManager.LayoutParams createDefaultLayoutParams() {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.format = PixelFormat.TRANSLUCENT;
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -48,23 +42,26 @@ public class Snackbar {
         int gravity = mSnackbarConfiguration.getGravity().equals(SnackbarConfiguration.Gravity.GRAVITY_TOP) ? Gravity.TOP : Gravity.BOTTOM;
         layoutParams.gravity = GravityCompat.getAbsoluteGravity(gravity, ViewCompat.LAYOUT_DIRECTION_LTR);
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_IN_OVERSCAN;
-        layoutParams.token = windowToken;
-        layoutParams.type = type;
         return layoutParams;
     }
 
     public void show() {
 
-        if (mRootLayout == null) {
-            WindowManager.LayoutParams layoutParams = createDefaultLayoutParams(WindowManager.LayoutParams.TYPE_TOAST, null);
-            mRootLayout = new FrameLayout(mApplicationContext) {
+        if (mRootLayout == null || !mContext.equals(mRootLayout.getContext())) {
+            WindowManager.LayoutParams layoutParams = createDefaultLayoutParams();
+            mRootLayout = new FrameLayout(mContext) {
                 @Override
                 protected void onAttachedToWindow() {
                     super.onAttachedToWindow();
                     onRootViewAvailable(this);
                 }
             };
-            mWindowManager.addView(mRootLayout, layoutParams);
+
+            try {
+                mWindowManager.addView(mRootLayout, layoutParams);
+            } catch (WindowManager.BadTokenException e) {
+                //can happen if activity changed and method is called before updateContext was called
+            }
         }
     }
 
@@ -76,6 +73,7 @@ public class Snackbar {
         mSnackbarRecycler.setLayoutManager(manager);
         rootView.addView(recyclerParent, mSnackbarRecycler.getLayoutParams());
         mSnackbarRecycler.setAdapter(mSnackbarAdapter);
+        mSnackbarAdapter.notifyDataSetChanged();
     }
 
     public void addSnackbarView(SnackbarView snackbarView) {
@@ -92,8 +90,19 @@ public class Snackbar {
         }
 
         if (mSnackbarAdapter.isEmpty()) {
-            mWindowManager.removeView(mRootLayout);
+            try {
+                mWindowManager.removeView(mRootLayout);
+            } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
+                //can happen if activity changed and method is called before updateContext was called
+            }
+
             mRootLayout = null;
         }
+    }
+
+    public void updateContext(Context context) {
+        mContext = context;
+        mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 }

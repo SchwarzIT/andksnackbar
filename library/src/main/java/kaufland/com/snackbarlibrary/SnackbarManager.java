@@ -36,12 +36,12 @@ public class SnackbarManager {
     });
     private static Semaphore sSemaphore;
 
-    public static void init(Context applicationContext, SnackbarConfiguration snackbarConfiguration) {
-        if (applicationContext == null || snackbarConfiguration == null) {
+    public static void init(SnackbarConfiguration snackbarConfiguration) {
+        if (snackbarConfiguration == null) {
             return;
         }
 
-        sSnackbar = new Snackbar(applicationContext, snackbarConfiguration);
+        sSnackbar = new Snackbar(snackbarConfiguration);
 
         if (snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)) {
 
@@ -51,6 +51,14 @@ public class SnackbarManager {
 
             sSemaphore = new Semaphore(Runtime.getRuntime().availableProcessors());
 
+        }
+    }
+
+    public static void rebindContext(Context context){
+
+        if(sSnackbar != null){
+            sSnackbar.updateContext(context);
+            sSnackbar.show();
         }
     }
 
