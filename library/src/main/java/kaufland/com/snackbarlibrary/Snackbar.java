@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,7 @@ public class Snackbar {
             try {
                 mWindowManager.addView(mRootLayout, layoutParams);
             } catch (WindowManager.BadTokenException e) {
+                Log.d("exception",e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
         }
@@ -68,12 +70,11 @@ public class Snackbar {
     private void onRootViewAvailable(final FrameLayout rootView) {
 
         View recyclerParent = mInflater.from(rootView.getContext()).inflate(R.layout.view_snackbar, null);
-        mSnackbarRecycler = (RecyclerView) recyclerParent.findViewById(R.id.snackbar_recycler);
+        mSnackbarRecycler = recyclerParent.findViewById(R.id.snackbar_recycler);
         LinearLayoutManager manager = new LinearLayoutManager(rootView.getContext());
         mSnackbarRecycler.setLayoutManager(manager);
         rootView.addView(recyclerParent, mSnackbarRecycler.getLayoutParams());
         mSnackbarRecycler.setAdapter(mSnackbarAdapter);
-        mSnackbarAdapter.notifyDataSetChanged();
     }
 
     public void addSnackbarView(SnackbarView snackbarView) {
@@ -93,6 +94,7 @@ public class Snackbar {
             try {
                 mWindowManager.removeView(mRootLayout);
             } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
+                Log.d("exception",e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
 

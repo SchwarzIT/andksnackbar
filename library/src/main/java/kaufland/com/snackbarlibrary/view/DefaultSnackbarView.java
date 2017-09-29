@@ -75,9 +75,9 @@ public class DefaultSnackbarView extends SnackbarView {
     @Override
     public View onCreateView(ViewGroup parent) {
         view = (FrameLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_default_snakbar_item, parent, false);
-        parentLayout = (RelativeLayout) view.findViewById(R.id.view_snackbar_item_parent);
-        mTitle = (TextView) view.findViewById(R.id.text_view_title);
-        mMessage = (TextView) view.findViewById(R.id.text_view_message);
+        parentLayout = view.findViewById(R.id.view_snackbar_item_parent);
+        mTitle =  view.findViewById(R.id.text_view_title);
+        mMessage = view.findViewById(R.id.text_view_message);
         return view;
     }
 
