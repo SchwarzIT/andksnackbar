@@ -216,10 +216,10 @@ public class ActionSnackbarView extends SnackbarView {
     @Override
     public View onCreateView(ViewGroup parent) {
         view = (FrameLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_action_snakbar_item, parent, false);
-        parentLayout = (RelativeLayout) view.findViewById(R.id.view_snackbar_item_parent);
-        mTitle = (TextView) view.findViewById(R.id.text_view_title);
-        mMessage = (TextView) view.findViewById(R.id.text_view_message);
-        mActionButton = (ImageButton) view.findViewById(R.id.button_action);
+        parentLayout = view.findViewById(R.id.view_snackbar_item_parent);
+        mTitle =  view.findViewById(R.id.text_view_title);
+        mMessage = view.findViewById(R.id.text_view_message);
+        mActionButton = view.findViewById(R.id.button_action);
         return view;
     }
 
