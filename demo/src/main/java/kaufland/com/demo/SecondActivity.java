@@ -21,8 +21,8 @@ public class SecondActivity extends AppCompatActivity {
     private Toolbar mToolbar;
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         SnackbarManager.rebindContext(this);
     }
 

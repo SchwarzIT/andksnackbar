@@ -44,13 +44,13 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
         return mSnackbarViews == null || mSnackbarViews.size() == 0;
     }
 
-    public void addItem(SnackbarView item) {
+    public synchronized void addItem(SnackbarView item) {
         mSnackbarViews.add(item);
         int position = mSnackbarViews.indexOf(item);
         notifyItemInserted(position);
     }
 
-    public void removeItem(SnackbarView view) {
+    public synchronized void removeItem(SnackbarView view) {
         int position = mSnackbarViews.indexOf(view);
         if (position > -1) {
             mSnackbarViews.remove(position);
