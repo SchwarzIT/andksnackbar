@@ -30,9 +30,9 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mCreateDefaultSnackbarButton = (Button) findViewById(R.id.create_snackbar_button);
-        mCreateActionSnackbarButton = (Button) findViewById(R.id.create_text_snackbar_button);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mCreateDefaultSnackbarButton =  findViewById(R.id.create_snackbar_button);
+        mCreateActionSnackbarButton =  findViewById(R.id.create_text_snackbar_button);
+        mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mCreateDefaultSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
