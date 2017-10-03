@@ -75,6 +75,7 @@ public class Snackbar {
         mSnackbarRecycler.setLayoutManager(manager);
         rootView.addView(recyclerParent, mSnackbarRecycler.getLayoutParams());
         mSnackbarRecycler.setAdapter(mSnackbarAdapter);
+        mSnackbarAdapter.notifyDataSetChanged();
     }
 
     public void addSnackbarView(SnackbarView snackbarView) {
