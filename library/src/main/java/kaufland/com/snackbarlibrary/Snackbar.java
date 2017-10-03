@@ -107,5 +107,8 @@ public class Snackbar {
         mContext = context;
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(mRootLayout!=null && mWindowManager!=null){
+            mWindowManager.removeView(mRootLayout);
+        }
     }
 }
