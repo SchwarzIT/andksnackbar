@@ -103,17 +103,17 @@ public class Snackbar {
         mContext = context;
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if(mRootLayout!=null && mWindowManager!=null){
-           removeViewFromWindowManager();
-        }
+        removeViewFromWindowManager();
     }
 
     private void removeViewFromWindowManager(){
-        try {
-            mWindowManager.removeView(mRootLayout);
-        } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
-            Log.d(TAG,e.getMessage());
-            //can happen if activity changed and method is called before updateContext was called
+        if(mRootLayout!=null && mWindowManager!=null){
+            try {
+                mWindowManager.removeView(mRootLayout);
+            } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
+                Log.d(TAG,e.getMessage());
+                //can happen if activity changed and method is called before updateContext was called
+            }
         }
     }
 }
