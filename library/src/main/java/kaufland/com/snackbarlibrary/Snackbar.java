@@ -20,6 +20,8 @@ import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 public class Snackbar {
 
+    private static final String TAG = Snackbar.class.getName();
+
     private FrameLayout mRootLayout;
     private WindowManager mWindowManager;
     private Context mContext;
@@ -110,7 +112,7 @@ public class Snackbar {
         try {
             mWindowManager.removeView(mRootLayout);
         } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
-            Log.d("exception",e.getMessage());
+            Log.d(TAG,e.getMessage());
             //can happen if activity changed and method is called before updateContext was called
         }
     }
