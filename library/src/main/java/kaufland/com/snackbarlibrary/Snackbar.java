@@ -20,6 +20,8 @@ import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 public class Snackbar {
 
+    private static final String TAG = Snackbar.class.getName();
+
     private FrameLayout mRootLayout;
     private WindowManager mWindowManager;
     private Context mContext;
@@ -92,13 +94,7 @@ public class Snackbar {
         }
 
         if (mSnackbarAdapter.isEmpty()) {
-            try {
-                mWindowManager.removeView(mRootLayout);
-            } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
-                Log.d("exception",e.getMessage());
-                //can happen if activity changed and method is called before updateContext was called
-            }
-
+            removeViewFromWindowManager();
             mRootLayout = null;
         }
     }
@@ -108,7 +104,16 @@ public class Snackbar {
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(mRootLayout!=null && mWindowManager!=null){
+           removeViewFromWindowManager();
+        }
+    }
+
+    private void removeViewFromWindowManager(){
+        try {
             mWindowManager.removeView(mRootLayout);
+        } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
+            Log.d(TAG,e.getMessage());
+            //can happen if activity changed and method is called before updateContext was called
         }
     }
 }
