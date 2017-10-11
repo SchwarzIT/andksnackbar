@@ -84,6 +84,10 @@ public class DefaultSnackbarView extends SnackbarView {
     @Override
     public void onBindView() {
 
+        if(view == null || parentLayout == null || mTitle == null || mMessage == null){
+            return;
+        }
+
         if (title != null) {
             mTitle.setText(title);
         } else {
