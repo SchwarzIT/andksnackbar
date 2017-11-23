@@ -2,7 +2,6 @@ package kaufland.com.snackbarlibrary.view;
 
 import android.view.View;
 
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class SnackbarAdapterTest {
 
     @Test
     public void testZeroAdapterSize(){
-        Assert.assertThat(mAdapter.isEmpty(), Matchers.is(true));
+        Assert.assertTrue(mAdapter.isEmpty());
     }
 
 
