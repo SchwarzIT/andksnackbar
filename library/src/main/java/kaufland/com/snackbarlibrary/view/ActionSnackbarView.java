@@ -33,6 +33,7 @@ public class ActionSnackbarView extends SnackbarView {
     private Integer backgroundColor;
     private Integer duration;
     private ActionListener actionListener;
+    private DismissListener dismissListener;
     private Integer drawable;
 
     private boolean isTitleBold;
@@ -85,6 +86,7 @@ public class ActionSnackbarView extends SnackbarView {
         titleStyle = builder.titleStyle;
         messageStyle = builder.messageStyle;
         elevation = builder.elevation;
+        dismissListener = builder.dismissListener;
     }
 
 
@@ -170,7 +172,7 @@ public class ActionSnackbarView extends SnackbarView {
 
                     if (shouldDismiss) {
                         if (getCallback() != null) {
-                            getCallback().onDismiss();
+                            getCallback().onDismiss(ActionSnackbarView.this);
                         }
                     }
                 }
@@ -211,6 +213,13 @@ public class ActionSnackbarView extends SnackbarView {
         }
 
 
+    }
+
+    @Override
+    public void onDismissed() {
+        if(dismissListener != null){
+            dismissListener.onDismissed();
+        }
     }
 
     @Override
@@ -345,6 +354,7 @@ public class ActionSnackbarView extends SnackbarView {
         private Integer backgroundColor;
         private Integer duration;
         private ActionListener actionListener;
+        private DismissListener dismissListener;
         private Integer drawable;
         private boolean isTitleBold;
         private boolean isMessageBold;
@@ -446,6 +456,11 @@ public class ActionSnackbarView extends SnackbarView {
 
         public Builder withActionListener(ActionListener actionListener) {
             this.actionListener = actionListener;
+            return this;
+        }
+
+        public Builder withDismissListener(DismissListener dismissListener) {
+            this.dismissListener = dismissListener;
             return this;
         }
 

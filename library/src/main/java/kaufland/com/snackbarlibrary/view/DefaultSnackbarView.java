@@ -177,6 +177,11 @@ public class DefaultSnackbarView extends SnackbarView {
     }
 
     @Override
+    public void onDismissed() {
+        //no work here
+    }
+
+    @Override
     public Integer getDuration() {
         return duration;
     }

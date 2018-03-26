@@ -38,7 +38,8 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
     }
 
     @Override
-    public void onDismiss() {
+    public void onDismiss(SnackbarView snackbarView) {
+        snackbarView.onDismissed();
         createMessage(SnackbarManager.MSG_DISMISS);
         mSemaphore.release();
     }
