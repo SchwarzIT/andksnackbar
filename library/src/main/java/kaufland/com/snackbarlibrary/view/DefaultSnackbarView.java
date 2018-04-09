@@ -76,7 +76,7 @@ public class DefaultSnackbarView extends SnackbarView {
     public View onCreateView(ViewGroup parent) {
         view = (FrameLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_default_snakbar_item, parent, false);
         parentLayout = view.findViewById(R.id.view_snackbar_item_parent);
-        mTitle =  view.findViewById(R.id.text_view_title);
+        mTitle = view.findViewById(R.id.text_view_title);
         mMessage = view.findViewById(R.id.text_view_message);
         return view;
     }
@@ -84,7 +84,7 @@ public class DefaultSnackbarView extends SnackbarView {
     @Override
     public void onBindView() {
 
-        if(view == null || parentLayout == null || mTitle == null || mMessage == null){
+        if (view == null || parentLayout == null || mTitle == null || mMessage == null) {
             return;
         }
 
@@ -289,7 +289,6 @@ public class DefaultSnackbarView extends SnackbarView {
         private Integer titleStyle;
         private Integer messageStyle;
         private Integer elevation;
-
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
             this.backgroundColor = backgroundColor;

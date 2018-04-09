@@ -24,7 +24,6 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         SnackbarView snackbarView = mSnackbarViews.get(position);
-
         if (snackbarView != null) {
             snackbarView.onBindView();
         }

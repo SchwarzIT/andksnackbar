@@ -14,8 +14,10 @@ public class SnackbarDemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SnackbarManager.init(SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
-                .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
-                .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)));
+        SnackbarManager.init(new SnackbarConfiguration.Builder()
+                .setGravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
+                .setType(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS)
+                .setMaxViewCount(SnackbarConfiguration.MaxCount.DEFAULT)
+                .build());
     }
 }

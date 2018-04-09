@@ -15,6 +15,7 @@ public class SnackbarManager {
     public static final int MSG_SHOW = 0;
     public static final int MSG_DISMISS = 1;
     private static Snackbar sSnackbar;
+    private static final String TAG = SnackbarManager.class.getSimpleName();
     private static final Handler sHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -22,8 +23,10 @@ public class SnackbarManager {
 
                 case MSG_SHOW:
                     SnackbarView viewToAdd = (SnackbarView) msg.obj;
-                    sSnackbar.addSnackbarView(viewToAdd);
-                    return true;
+                    if (sSnackbar.getSnackbarAdapter() != null && sSnackbar.getSnackbarAdapter().getItemCount() < msg.arg1) {
+                        sSnackbar.addSnackbarView(viewToAdd);
+                        return true;
+                    }
 
                 case MSG_DISMISS:
                     SnackbarView viewToRemove = (SnackbarView) msg.obj;
@@ -36,27 +39,28 @@ public class SnackbarManager {
     });
     private static Semaphore sSemaphore;
 
+    private static SnackbarConfiguration sSnackbarConfiguration;
+
     public static void init(SnackbarConfiguration snackbarConfiguration) {
         if (snackbarConfiguration == null) {
             return;
         }
 
         sSnackbar = new Snackbar(snackbarConfiguration);
+        sSnackbarConfiguration = snackbarConfiguration;
 
         if (snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)) {
-
             sSemaphore = new Semaphore(1);
 
         } else {
-
             sSemaphore = new Semaphore(Runtime.getRuntime().availableProcessors());
 
         }
     }
 
-    public static void rebindContext(Context context){
+    public static void rebindContext(Context context) {
 
-        if(sSnackbar != null){
+        if (sSnackbar != null) {
             sSnackbar.updateContext(context);
             sSnackbar.show();
         }
@@ -65,11 +69,7 @@ public class SnackbarManager {
     public static void showSnackbar(SnackbarView view) {
 
         if (view != null && sSemaphore != null && sHandler != null) {
-
-            new SnackbarWorker(view, sSemaphore, sHandler).start();
-
+            new SnackbarWorker(view, sSemaphore, sHandler, sSnackbarConfiguration.getMaxViewCount()).start();
         }
     }
-
-
 }

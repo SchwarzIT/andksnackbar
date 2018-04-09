@@ -1,6 +1,7 @@
 package kaufland.com.snackbarlibrary;
 
 import junit.framework.Assert;
+
 import org.junit.Test;
 
 /**
@@ -13,22 +14,20 @@ public class SnackbarConfigurationTest {
     @Test
     public void testSnackbarConfigurationWithGravityTopAndSingleType() {
 
-        SnackbarConfiguration snackbarConfiguration = SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
-                .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
-                .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR));
+        SnackbarConfiguration snackbarConfiguration = new SnackbarConfiguration.Builder()
+                .setGravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
+                .setType(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR).build();
         Assert.assertEquals(SnackbarConfiguration.Gravity.GRAVITY_TOP, snackbarConfiguration.getGravity());
-        Assert.assertEquals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR,snackbarConfiguration.getSnackbarType());
+        Assert.assertEquals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR, snackbarConfiguration.getSnackbarType());
     }
-
 
     @Test
-    public void  testSnackbarConfigurationWithGravityBottomAndMultipleSnackbarType(){
+    public void testSnackbarConfigurationWithGravityBottomAndMultipleSnackbarType() {
 
-        SnackbarConfiguration snackbarConfiguration = SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
-                .gravity(SnackbarConfiguration.Gravity.GRAVITY_BOTTOM)
-                .type(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS));
+        SnackbarConfiguration snackbarConfiguration = new SnackbarConfiguration.Builder()
+                .setGravity(SnackbarConfiguration.Gravity.GRAVITY_BOTTOM)
+                .setType(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS).build();
         Assert.assertEquals(SnackbarConfiguration.Gravity.GRAVITY_BOTTOM, snackbarConfiguration.getGravity());
-        Assert.assertEquals(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS,snackbarConfiguration.getSnackbarType());
+        Assert.assertEquals(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS, snackbarConfiguration.getSnackbarType());
     }
-
 }

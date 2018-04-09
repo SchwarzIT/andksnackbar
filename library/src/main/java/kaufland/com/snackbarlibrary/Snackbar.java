@@ -27,15 +27,15 @@ public class Snackbar {
     private Context mContext;
     private LayoutInflater mInflater;
     private RecyclerView mSnackbarRecycler;
+
+
     private SnackbarAdapter mSnackbarAdapter;
     private SnackbarConfiguration mSnackbarConfiguration;
-
 
     public Snackbar(@NonNull SnackbarConfiguration configuration) {
         mSnackbarConfiguration = configuration;
         mSnackbarAdapter = new SnackbarAdapter();
     }
-
 
     private WindowManager.LayoutParams createDefaultLayoutParams() {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -63,7 +63,7 @@ public class Snackbar {
             try {
                 mWindowManager.addView(mRootLayout, layoutParams);
             } catch (WindowManager.BadTokenException e) {
-                Log.d("exception",e.getMessage());
+                Log.d("exception", e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
         }
@@ -106,12 +106,16 @@ public class Snackbar {
         removeViewFromWindowManager();
     }
 
-    private void removeViewFromWindowManager(){
-        if(mRootLayout!=null && mWindowManager!=null){
+    public SnackbarAdapter getSnackbarAdapter() {
+        return mSnackbarAdapter;
+    }
+
+    private void removeViewFromWindowManager() {
+        if (mRootLayout != null && mWindowManager != null) {
             try {
                 mWindowManager.removeView(mRootLayout);
             } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
-                Log.d(TAG,e.getMessage());
+                Log.d(TAG, e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
         }
