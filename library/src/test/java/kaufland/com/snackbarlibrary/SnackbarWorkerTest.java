@@ -16,7 +16,7 @@ import java.util.concurrent.Semaphore;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({SnackbarWorker.class,Semaphore.class,Handler.class})
+@PrepareForTest({SnackbarWorker.class, Semaphore.class, Handler.class})
 public class SnackbarWorkerTest {
 
     private SnackbarWorker mSnackbarWorker;
@@ -27,14 +27,16 @@ public class SnackbarWorkerTest {
 
     private Handler mHandler;
 
+    private SnackbarConfiguration sSnackbarConfiguration;
+
     @Before
     public void init() {
         mSnackbarView = PowerMockito.mock(SnackbarView.class);
         mHandler = PowerMockito.spy(new Handler());
         mSemaphore = PowerMockito.spy(new Semaphore(1));
-        mSnackbarWorker = PowerMockito.spy(new SnackbarWorker(mSnackbarView, mSemaphore, mHandler));
+        sSnackbarConfiguration = PowerMockito.spy(new SnackbarConfiguration.Builder().setMaxViewCount(SnackbarConfiguration.ViewType.SINGLE).build());
+        mSnackbarWorker = PowerMockito.spy(new SnackbarWorker(mSnackbarView, mSemaphore, mHandler, sSnackbarConfiguration.getMaxViewCount()));
     }
-
 
     @Test
     public void testRunMethod() throws InterruptedException {
@@ -79,7 +81,7 @@ public class SnackbarWorkerTest {
     }
 
     @Test
-    public void testMessageShowCalledDismissNotCalled() throws InterruptedException{
+    public void testMessageShowCalledDismissNotCalled() throws InterruptedException {
 
         Message messageShow = new Message();
         messageShow.what = SnackbarManager.MSG_SHOW;

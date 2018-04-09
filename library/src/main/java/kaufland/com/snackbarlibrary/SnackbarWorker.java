@@ -10,14 +10,16 @@ import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 public class SnackbarWorker extends Thread implements SnackbarView.Callback {
 
+    private int mMaxViewCount;
     private SnackbarView mSnackbarView;
     private Semaphore mSemaphore;
     private Handler mHandler;
 
-    public SnackbarWorker(SnackbarView snackbarView, Semaphore semaphore, Handler handler) {
+    public SnackbarWorker(SnackbarView snackbarView, Semaphore semaphore, Handler handler, int maxViewCount) {
         mSnackbarView = snackbarView;
         mSemaphore = semaphore;
         mHandler = handler;
+        mMaxViewCount = maxViewCount;
         mSnackbarView.setCallback(this);
     }
 
@@ -44,11 +46,11 @@ public class SnackbarWorker extends Thread implements SnackbarView.Callback {
         mSemaphore.release();
     }
 
-
     public Message createMessage(int what) {
         Message message = mHandler.obtainMessage();
         message.what = what;
         message.obj = mSnackbarView;
+        message.arg1 = mMaxViewCount;
         message.sendToTarget();
         return message;
     }
