@@ -7,10 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import kaufland.com.snackbarlibrary.SnackbarManager;
 import kaufland.com.snackbarlibrary.view.ActionListener;
 import kaufland.com.snackbarlibrary.view.ActionSnackbarView;
 import kaufland.com.snackbarlibrary.view.DefaultSnackbarView;
+import kaufland.com.snackbarlibrary.worker.WorkerHandler;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SnackbarManager.rebindContext(this);
+        WorkerHandler.getInstance().rebindContext(this);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SnackbarManager.showSnackbar(new DefaultSnackbarView.Builder()
+                WorkerHandler.getInstance().showSnackbar(new DefaultSnackbarView.Builder()
                         .withBackgroundColor(R.color.colorGreen)
                         .withTitle("Example default title")
                         .withTitleColor(R.color.colorWhite)
@@ -54,14 +54,13 @@ public class MainActivity extends AppCompatActivity {
                         .build());
 
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
-
             }
         });
         mCreateActionSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SnackbarManager.showSnackbar(new ActionSnackbarView.Builder()
+                WorkerHandler.getInstance().showSnackbar(new ActionSnackbarView.Builder()
                         .withBackgroundColor(R.color.colorRed)
                         .withTitle("Example title")
                         .withTitleColor(R.color.colorWhite)
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         .withMarginsAroundActionButton(10, 10, 10, 10)
                         .withElevation(6)
                         .build());
-
             }
         });
     }

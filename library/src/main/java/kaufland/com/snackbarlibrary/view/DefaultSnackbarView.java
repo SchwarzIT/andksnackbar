@@ -173,7 +173,6 @@ public class DefaultSnackbarView extends SnackbarView {
             view.setPadding(0, 0, 0, ViewUtils.convertDpToPixel(view.getContext(), elevation));
             parentLayout.setElevation(ViewUtils.convertDpToPixel(view.getContext(), elevation));
         }
-
     }
 
     @Override
@@ -372,10 +371,8 @@ public class DefaultSnackbarView extends SnackbarView {
             return this;
         }
 
-
         public SnackbarView build() {
             return new DefaultSnackbarView(this);
         }
     }
-
 }

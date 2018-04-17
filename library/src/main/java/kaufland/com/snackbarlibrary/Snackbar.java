@@ -27,8 +27,6 @@ public class Snackbar {
     private Context mContext;
     private LayoutInflater mInflater;
     private RecyclerView mSnackbarRecycler;
-
-
     private SnackbarAdapter mSnackbarAdapter;
     private SnackbarConfiguration mSnackbarConfiguration;
 
@@ -63,7 +61,7 @@ public class Snackbar {
             try {
                 mWindowManager.addView(mRootLayout, layoutParams);
             } catch (WindowManager.BadTokenException e) {
-                Log.d("exception", e.getMessage());
+                Log.d(TAG, e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
         }

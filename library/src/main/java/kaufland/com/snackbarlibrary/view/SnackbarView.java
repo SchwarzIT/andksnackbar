@@ -3,10 +3,9 @@ package kaufland.com.snackbarlibrary.view;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 public abstract class SnackbarView {
 
-    private Callback callback;
+    private Callback mCallback;
 
     public abstract Integer getDuration();
 
@@ -15,11 +14,11 @@ public abstract class SnackbarView {
     public abstract void onBindView();
 
     public Callback getCallback() {
-        return callback;
+        return mCallback;
     }
 
     public void setCallback(Callback callback) {
-        this.callback = callback;
+        mCallback = callback;
     }
 
     public abstract void onDismissed();
