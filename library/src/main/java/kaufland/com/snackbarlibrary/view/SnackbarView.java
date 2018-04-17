@@ -22,7 +22,9 @@ public abstract class SnackbarView {
         this.callback = callback;
     }
 
+    public abstract void onDismissed();
+
     public interface Callback {
-        void onDismiss();
+        void onDismiss(SnackbarView view);
     }
 }

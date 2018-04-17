@@ -12,10 +12,12 @@ import kaufland.com.snackbarlibrary.SnackbarManager;
 import kaufland.com.snackbarlibrary.view.ActionListener;
 import kaufland.com.snackbarlibrary.view.ActionSnackbarView;
 import kaufland.com.snackbarlibrary.view.DefaultSnackbarView;
+import kaufland.com.snackbarlibrary.view.DismissListener;
 
 
 public class SecondActivity extends AppCompatActivity {
 
+    private static final String TAG = SecondActivity.class.getName();
     private Button mCreateDefaultSnackbarButton;
     private Button mCreateActionSnackbarButton;
     private Toolbar mToolbar;
@@ -77,6 +79,12 @@ public class SecondActivity extends AppCompatActivity {
                             public boolean onAction() {
                                 //dismiss snackbar view
                                 return true;
+                            }
+                        })
+                        .withDismissListener(new DismissListener() {
+                            @Override
+                            public void onDismissed() {
+                                Log.i(TAG, "dismissed listener called");
                             }
                         })
                         .withMarginsAroundTitle(16,16,16,0)
