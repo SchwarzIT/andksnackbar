@@ -17,10 +17,10 @@ public class SnackbarQueue {
 
 
     private static final String TAG = SnackbarQueue.class.getName();
-    private final Queue<SnackbarView> mCartExecutors = new ConcurrentLinkedQueue<>();
+    private final Queue<SnackbarView> mQueue = new ConcurrentLinkedQueue<>();
     private final ExecutorService mExecutionWorker;
 
-    private Snackbar sSnackbar;
+    private Snackbar mSnackbar;
     private volatile boolean mExecutionOnHold = true;
 
     private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
@@ -47,17 +47,17 @@ public class SnackbarQueue {
 
     public SnackbarQueue(SnackbarConfiguration snackbarConfiguration) {
 
-        sSnackbar = new Snackbar(snackbarConfiguration);
+        mSnackbar = new Snackbar(snackbarConfiguration);
 
         mExecutionWorker = Executors.newFixedThreadPool(snackbarConfiguration.getSnackbarMaxCount());
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-               if(sSnackbar != null){
+               if(mSnackbar != null){
                    mainThreadHandler.post(new Runnable() {
                        @Override
                        public void run() {
-                           sSnackbar.verifyVisible();
+                           mSnackbar.verifyVisible();
                        }
                    });
 
@@ -70,14 +70,14 @@ public class SnackbarQueue {
 
         mExecutionOnHold = context == null;
 
-        if (sSnackbar != null) {
-            sSnackbar.updateContext(context);
-            sSnackbar.show();
+        if (mSnackbar != null) {
+            mSnackbar.updateContext(context);
+            mSnackbar.show();
         }
     }
 
     public void add(final SnackbarView view) {
-        mCartExecutors.add(view);
+        mQueue.add(view);
         workOnQueue();
     }
 
@@ -88,12 +88,12 @@ public class SnackbarQueue {
             return;
         }
 
-        final SnackbarView view = mCartExecutors.peek();
+        final SnackbarView view = mQueue.peek();
 
         mExecutionWorker.execute(new Runnable() {
             @Override
             public void run() {
-                if (mExecutionOnHold || !mCartExecutors.contains(view)) {
+                if (mExecutionOnHold || !mQueue.contains(view)) {
                     // periodic schedule may have scheduled nextExecutor while it was being executed
                     return;
                 }
@@ -101,8 +101,8 @@ public class SnackbarQueue {
                 mainThreadHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        sSnackbar.addSnackbarView(view);
-                        mCartExecutors.remove(view);
+                        mSnackbar.addSnackbarView(view);
+                        mQueue.remove(view);
                     }
                 });
 
@@ -126,7 +126,7 @@ public class SnackbarQueue {
                 mainThreadHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        sSnackbar.removeSnackbarView(view);
+                        mSnackbar.removeSnackbarView(view);
                     }
                 });
 
