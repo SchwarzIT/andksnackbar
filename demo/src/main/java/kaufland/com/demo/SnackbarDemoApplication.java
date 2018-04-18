@@ -16,6 +16,6 @@ public class SnackbarDemoApplication extends Application {
         super.onCreate();
         SnackbarManager.init(SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
                 .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
-                .count(1)));
+                .maxCount(1)));
     }
 }

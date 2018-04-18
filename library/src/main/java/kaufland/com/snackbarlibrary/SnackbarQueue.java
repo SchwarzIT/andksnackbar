@@ -49,7 +49,7 @@ public class SnackbarQueue {
 
         sSnackbar = new Snackbar(snackbarConfiguration);
 
-        mExecutionWorker = Executors.newFixedThreadPool(snackbarConfiguration.getSnackbarCount());
+        mExecutionWorker = Executors.newFixedThreadPool(snackbarConfiguration.getSnackbarMaxCount());
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {

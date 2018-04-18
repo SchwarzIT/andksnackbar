@@ -4,11 +4,11 @@ package kaufland.com.snackbarlibrary;
 public class SnackbarConfiguration {
 
     private Gravity mGravity;
-    private int mSnackbarCount;
+    private int mSnackbarMaxCount;
 
     private SnackbarConfiguration(Builder builder) {
         mGravity = builder.gravity;
-        mSnackbarCount = builder.count;
+        mSnackbarMaxCount = builder.maxCount;
     }
 
     public static SnackbarConfiguration configure(Builder builder) {
@@ -19,8 +19,8 @@ public class SnackbarConfiguration {
         return mGravity;
     }
 
-    public int getSnackbarCount() {
-        return mSnackbarCount;
+    public int getSnackbarMaxCount() {
+        return mSnackbarMaxCount;
     }
 
     public enum Gravity {
@@ -30,7 +30,7 @@ public class SnackbarConfiguration {
     public static class Builder {
 
         private Gravity gravity;
-        private int count;
+        private int maxCount;
 
 
         public Builder gravity(Gravity gravity) {
@@ -39,9 +39,9 @@ public class SnackbarConfiguration {
             return this;
         }
 
-        public Builder count(int count) {
+        public Builder maxCount(int maxCount) {
 
-            this.count = count;
+            this.maxCount = maxCount;
 
             return this;
 
