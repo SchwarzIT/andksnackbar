@@ -5,68 +5,40 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
 
 public class SnackbarManager {
 
-    public static final int MSG_SHOW = 0;
-    public static final int MSG_DISMISS = 1;
-    private static Snackbar sSnackbar;
-    private static final Handler sHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-
-                case MSG_SHOW:
-                    SnackbarView viewToAdd = (SnackbarView) msg.obj;
-                    sSnackbar.addSnackbarView(viewToAdd);
-                    return true;
-
-                case MSG_DISMISS:
-                    SnackbarView viewToRemove = (SnackbarView) msg.obj;
-                    sSnackbar.removeSnackbarView(viewToRemove);
-                    return true;
-            }
-
-            return false;
-        }
-    });
-    private static Semaphore sSemaphore;
+    private static SnackbarQueue mSnackbarQueue;
 
     public static void init(SnackbarConfiguration snackbarConfiguration) {
         if (snackbarConfiguration == null) {
             return;
         }
 
-        sSnackbar = new Snackbar(snackbarConfiguration);
-
-        if (snackbarConfiguration.getSnackbarType().equals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR)) {
-
-            sSemaphore = new Semaphore(1);
-
-        } else {
-
-            sSemaphore = new Semaphore(Runtime.getRuntime().availableProcessors());
-
-        }
+        mSnackbarQueue = new SnackbarQueue(snackbarConfiguration);
     }
 
     public static void rebindContext(Context context){
 
-        if(sSnackbar != null){
-            sSnackbar.updateContext(context);
-            sSnackbar.show();
+        if(mSnackbarQueue != null){
+            mSnackbarQueue.rebindContext(context);
         }
     }
 
     public static void showSnackbar(SnackbarView view) {
 
-        if (view != null && sSemaphore != null && sHandler != null) {
+        if (view != null) {
 
-            new SnackbarWorker(view, sSemaphore, sHandler).start();
+            if(mSnackbarQueue != null){
+                mSnackbarQueue.add(view);
+            }
 
         }
     }

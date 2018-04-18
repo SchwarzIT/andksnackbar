@@ -15,9 +15,9 @@ public class SnackbarConfigurationTest {
 
         SnackbarConfiguration snackbarConfiguration = SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
                 .gravity(SnackbarConfiguration.Gravity.GRAVITY_TOP)
-                .type(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR));
+                .count(1));
         Assert.assertEquals(SnackbarConfiguration.Gravity.GRAVITY_TOP, snackbarConfiguration.getGravity());
-        Assert.assertEquals(SnackbarConfiguration.SnackbarType.SINGLE_SNACKBAR,snackbarConfiguration.getSnackbarType());
+        Assert.assertEquals(1,snackbarConfiguration.getSnackbarCount());
     }
 
 
@@ -26,9 +26,9 @@ public class SnackbarConfigurationTest {
 
         SnackbarConfiguration snackbarConfiguration = SnackbarConfiguration.configure(new SnackbarConfiguration.Builder()
                 .gravity(SnackbarConfiguration.Gravity.GRAVITY_BOTTOM)
-                .type(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS));
+                .count(3));
         Assert.assertEquals(SnackbarConfiguration.Gravity.GRAVITY_BOTTOM, snackbarConfiguration.getGravity());
-        Assert.assertEquals(SnackbarConfiguration.SnackbarType.MULTIPLE_SNACKBARS,snackbarConfiguration.getSnackbarType());
+        Assert.assertEquals(3,snackbarConfiguration.getSnackbarCount());
     }
 
 }

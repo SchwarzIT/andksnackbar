@@ -50,6 +50,11 @@ public class Snackbar {
 
     public void show() {
 
+        if(mContext == null){
+            Log.e(TAG, "context=null did you missed to call SnackbarManager.rebindContext?");
+            return;
+        }
+
         if (mRootLayout == null || !mContext.equals(mRootLayout.getContext())) {
             WindowManager.LayoutParams layoutParams = createDefaultLayoutParams();
             mRootLayout = new FrameLayout(mContext) {
@@ -114,6 +119,14 @@ public class Snackbar {
                 Log.d(TAG,e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
+        }
+    }
+
+    public void verifyVisible() {
+        if(mRootLayout == null || mRootLayout.getParent() == null){
+            removeViewFromWindowManager();
+            mRootLayout = null;
+            show();
         }
     }
 }
