@@ -57,6 +57,8 @@ public class ActionSnackbarView extends SnackbarView {
     private Integer messageStyle;
     private Integer elevation;
 
+    private boolean swipeToDismiss;
+
 
     private ActionSnackbarView(Builder builder) {
         title = builder.title;
@@ -87,6 +89,7 @@ public class ActionSnackbarView extends SnackbarView {
         messageStyle = builder.messageStyle;
         elevation = builder.elevation;
         dismissListener = builder.dismissListener;
+        swipeToDismiss = builder.swipeToDismiss;
     }
 
 
@@ -172,7 +175,7 @@ public class ActionSnackbarView extends SnackbarView {
 
                     if (shouldDismiss) {
                         if (getCallback() != null) {
-                            getCallback().onDismiss(ActionSnackbarView.this);
+                            getCallback().onDismiss();
                         }
                     }
                 }
@@ -225,6 +228,11 @@ public class ActionSnackbarView extends SnackbarView {
     @Override
     public Integer getDuration() {
         return duration;
+    }
+
+    @Override
+    public boolean isSwipeToDismiss() {
+        return swipeToDismiss;
     }
 
     @Override
@@ -375,10 +383,16 @@ public class ActionSnackbarView extends SnackbarView {
         private Integer titleStyle;
         private Integer messageStyle;
         private Integer elevation;
+        private boolean swipeToDismiss;
 
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
             this.backgroundColor = backgroundColor;
+            return this;
+        }
+
+        public Builder withSwipeToDismiss(){
+            swipeToDismiss = true;
             return this;
         }
 

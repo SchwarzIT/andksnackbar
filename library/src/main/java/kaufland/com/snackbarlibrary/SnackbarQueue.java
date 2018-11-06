@@ -111,7 +111,7 @@ public class SnackbarQueue {
 
                 view.setCallback(new SnackbarView.Callback() {
                     @Override
-                    public void onDismiss(SnackbarView view) {
+                    public void onDismiss() {
                         waiting.interrupt();
                     }
                 });

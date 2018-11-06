@@ -54,6 +54,7 @@ public class SecondActivity extends AppCompatActivity {
                         .withMarginsAroundMessage(16,16,16,16)
                         .withDuration(2500)
                         .withElevation(6)
+                        .withSwipeToDismiss()
                         .build());
 
 

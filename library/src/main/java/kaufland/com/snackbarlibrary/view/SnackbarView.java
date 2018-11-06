@@ -4,11 +4,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public abstract class SnackbarView {
+public abstract class SnackbarView{
 
     private Callback callback;
 
     public abstract Integer getDuration();
+
+    public abstract boolean isSwipeToDismiss();
 
     public abstract View onCreateView(ViewGroup parent);
 
@@ -25,6 +27,6 @@ public abstract class SnackbarView {
     public abstract void onDismissed();
 
     public interface Callback {
-        void onDismiss(SnackbarView view);
+        void onDismiss();
     }
 }

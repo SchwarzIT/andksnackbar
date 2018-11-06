@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import kaufland.com.snackbarlibrary.utils.SwipeToDeleteCallback;
 import kaufland.com.snackbarlibrary.view.SnackbarAdapter;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
 
@@ -50,7 +52,7 @@ public class Snackbar {
 
     public void show() {
 
-        if(mContext == null){
+        if (mContext == null) {
             Log.e(TAG, "context=null did you missed to call SnackbarManager.rebindContext?");
             return;
         }
@@ -68,7 +70,7 @@ public class Snackbar {
             try {
                 mWindowManager.addView(mRootLayout, layoutParams);
             } catch (WindowManager.BadTokenException e) {
-                Log.d("exception",e.getMessage());
+                Log.d("exception", e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
         }
@@ -78,8 +80,38 @@ public class Snackbar {
 
         View recyclerParent = mInflater.from(rootView.getContext()).inflate(R.layout.view_snackbar, null);
         mSnackbarRecycler = recyclerParent.findViewById(R.id.snackbar_recycler);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback() {
+
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+
+                SnackbarView snackbarView = mSnackbarAdapter.getSnackbarView(viewHolder.getAdapterPosition());
+                if (snackbarView == null || !snackbarView.isSwipeToDismiss()) {
+                    return 0;
+                }
+
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                SnackbarView snackbarView = mSnackbarAdapter.getSnackbarView(viewHolder.getAdapterPosition());
+                if (snackbarView != null) {
+                    snackbarView.getCallback().onDismiss();
+                }
+            }
+        });
+
+        itemTouchHelper.attachToRecyclerView(mSnackbarRecycler);
+
         LinearLayoutManager manager = new LinearLayoutManager(rootView.getContext());
         mSnackbarRecycler.setLayoutManager(manager);
+
         rootView.addView(recyclerParent, mSnackbarRecycler.getLayoutParams());
         mSnackbarRecycler.setAdapter(mSnackbarAdapter);
         mSnackbarAdapter.notifyDataSetChanged();
@@ -111,19 +143,19 @@ public class Snackbar {
         removeViewFromWindowManager();
     }
 
-    private void removeViewFromWindowManager(){
-        if(mRootLayout!=null && mWindowManager!=null){
+    private void removeViewFromWindowManager() {
+        if (mRootLayout != null && mWindowManager != null) {
             try {
                 mWindowManager.removeView(mRootLayout);
             } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
-                Log.d(TAG,e.getMessage());
+                Log.d(TAG, e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
             }
         }
     }
 
     public void verifyVisible() {
-        if(mRootLayout == null || mRootLayout.getParent() == null){
+        if (mRootLayout == null || mRootLayout.getParent() == null) {
             removeViewFromWindowManager();
             mRootLayout = null;
             show();

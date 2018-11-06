@@ -58,6 +58,15 @@ public class SnackbarAdapter extends RecyclerView.Adapter<SnackbarAdapter.ViewHo
         }
     }
 
+    public SnackbarView getSnackbarView(int index){
+
+        if(index < 0 || index > mSnackbarViews.size()){
+            return null;
+        }
+
+        return mSnackbarViews.get(index);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ViewHolder(View itemView) {

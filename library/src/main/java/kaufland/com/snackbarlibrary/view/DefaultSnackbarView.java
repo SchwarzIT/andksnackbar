@@ -47,6 +47,7 @@ public class DefaultSnackbarView extends SnackbarView {
     private Integer titleStyle;
     private Integer messageStyle;
     private Integer elevation;
+    private boolean swipeToDismiss;
 
     public DefaultSnackbarView(Builder builder) {
         title = builder.title;
@@ -70,6 +71,7 @@ public class DefaultSnackbarView extends SnackbarView {
         titleStyle = builder.titleStyle;
         messageStyle = builder.messageStyle;
         elevation = builder.elevation;
+        swipeToDismiss = builder.swipeToDismiss;
     }
 
     @Override
@@ -186,6 +188,11 @@ public class DefaultSnackbarView extends SnackbarView {
         return duration;
     }
 
+    @Override
+    public boolean isSwipeToDismiss() {
+        return swipeToDismiss;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -290,6 +297,12 @@ public class DefaultSnackbarView extends SnackbarView {
         private Integer messageStyle;
         private Integer elevation;
 
+        private boolean swipeToDismiss;
+
+        public Builder withSwipeToDismiss(){
+            swipeToDismiss = true;
+            return this;
+        }
 
         public Builder withBackgroundColor(@ColorRes int backgroundColor) {
             this.backgroundColor = backgroundColor;
