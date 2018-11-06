@@ -128,6 +128,7 @@ public class Snackbar {
 
         if (snackbarView != null) {
             mSnackbarAdapter.removeItem(snackbarView);
+            snackbarView.onDismissed();
         }
 
         if (mSnackbarAdapter.isEmpty()) {
