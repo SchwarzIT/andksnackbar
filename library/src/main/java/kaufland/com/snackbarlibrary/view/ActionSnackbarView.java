@@ -151,7 +151,7 @@ public class ActionSnackbarView extends SnackbarView {
     @Override
     public void onBindView() {
 
-        if (view == null || parentLayout == null || mTitle == null || mMessage == null || mActionButton == null && mActionText == null) {
+        if (view == null || parentLayout == null || mTitle == null || mMessage == null || (mActionButton == null && mActionText == null)) {
             return;
         }
 
