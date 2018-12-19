@@ -408,19 +408,19 @@ public class ActionSnackbarView extends SnackbarView {
     }
 
     public Integer getActionTextMarginLeft() {
-        return actionButtonMarginLeft;
+        return actionTextMarginLeft;
     }
 
     public Integer getActionTextMarginTop() {
-        return actionButtonMarginTop;
+        return actionTextMarginTop;
     }
 
     public Integer getActionTextMarginRight() {
-        return actionButtonMarginRight;
+        return actionTextMarginRight;
     }
 
     public Integer getActionTextMarginBottom() {
-        return actionButtonMarginBottom;
+        return actionTextMarginBottom;
     }
 
     public Integer getTitleTextSize() {
