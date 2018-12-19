@@ -21,44 +21,88 @@ import kaufland.com.snackbarlibrary.utils.ViewUtils;
 public class ActionSnackbarView extends SnackbarView {
 
     private FrameLayout view;
+
     private RelativeLayout parentLayout;
+
     private TextView mTitle;
+
     private TextView mMessage;
+
     private ImageButton mActionButton;
 
+    private TextView mActionText;
+
     private String title;
+
     private String message;
+
     private Integer titleColor;
+
     private Integer messageColor;
+
     private Integer backgroundColor;
+
     private Integer duration;
+
     private ActionListener actionListener;
+
     private DismissListener dismissListener;
+
     private Integer drawable;
 
+    private String actionText;
+
     private boolean isTitleBold;
+
     private boolean isMessageBold;
 
     private Integer titleMarginLeft;
+
     private Integer titleMarginTop;
+
     private Integer titleMarginRight;
+
     private Integer titleMarginBottom;
+
     private Integer messageMarginLeft;
+
     private Integer messageMarginTop;
+
     private Integer messageMarginRight;
+
     private Integer messageMarginBottom;
+
     private Integer actionButtonMarginLeft;
+
     private Integer actionButtonMarginTop;
+
     private Integer actionButtonMarginRight;
+
     private Integer actionButtonMarginBottom;
+
+    private Integer actionTextMarginLeft;
+
+    private Integer actionTextMarginTop;
+
+    private Integer actionTextMarginRight;
+
+    private Integer actionTextMarginBottom;
+
+    private Integer actionTextColor;
+
+    private Boolean isActionTextBold;
+
     private Integer titleTextSize;
+
     private Integer messageTextSize;
+
     private Integer titleStyle;
+
     private Integer messageStyle;
+
     private Integer elevation;
 
     private boolean swipeToDismiss;
-
 
     private ActionSnackbarView(Builder builder) {
         title = builder.title;
@@ -69,6 +113,7 @@ public class ActionSnackbarView extends SnackbarView {
         duration = builder.duration;
         actionListener = builder.actionListener;
         drawable = builder.drawable;
+        actionText = builder.actionText;
         isTitleBold = builder.isTitleBold;
         isMessageBold = builder.isMessageBold;
         titleMarginLeft = builder.titleMarginLeft;
@@ -83,6 +128,12 @@ public class ActionSnackbarView extends SnackbarView {
         actionButtonMarginTop = builder.actionButtonMarginTop;
         actionButtonMarginRight = builder.actionButtonMarginRight;
         actionButtonMarginBottom = builder.actionButtonMarginBottom;
+        actionTextMarginLeft = builder.actionTextMarginLeft;
+        actionTextMarginTop = builder.actionTextMarginTop;
+        actionTextMarginRight = builder.actionTextMarginRight;
+        actionTextMarginBottom = builder.actionTextMarginBottom;
+        actionTextColor = builder.actionTextColor;
+        isActionTextBold = builder.isActionTextBold;
         titleTextSize = builder.titleTextSize;
         messageTextSize = builder.messageTextSize;
         titleStyle = builder.titleStyle;
@@ -100,7 +151,7 @@ public class ActionSnackbarView extends SnackbarView {
     @Override
     public void onBindView() {
 
-        if(view == null || parentLayout == null || mTitle == null || mMessage == null || mActionButton == null){
+        if (view == null || parentLayout == null || mTitle == null || mMessage == null || mActionButton == null && mActionText == null) {
             return;
         }
 
@@ -130,6 +181,10 @@ public class ActionSnackbarView extends SnackbarView {
 
         if (backgroundColor != null) {
             parentLayout.setBackgroundColor(ContextCompat.getColor(view.getContext(), backgroundColor));
+        }
+
+        if (actionText != null) {
+            mActionText.setText(actionText);
         }
 
         if (drawable != null) {
@@ -167,8 +222,27 @@ public class ActionSnackbarView extends SnackbarView {
             mActionButton.setLayoutParams(layoutParams);
         }
 
+        if (actionTextMarginLeft != null && actionTextMarginRight != null && actionTextMarginTop != null && actionTextMarginBottom != null) {
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mActionText.getLayoutParams();
+            int marginLeftPx = ViewUtils.convertDpToPixel(view.getContext(), actionTextMarginLeft);
+            int marginRightPx = ViewUtils.convertDpToPixel(view.getContext(), actionTextMarginRight);
+            int marginTopPx = ViewUtils.convertDpToPixel(view.getContext(), actionTextMarginTop);
+            int marginBottomPx = ViewUtils.convertDpToPixel(view.getContext(), actionTextMarginBottom);
+            layoutParams.setMargins(marginLeftPx, marginTopPx, marginRightPx, marginBottomPx);
+            mActionText.setLayoutParams(layoutParams);
+        }
+
+        if (actionTextColor != null && mActionText != null) {
+            mActionText.setTextColor(ContextCompat.getColor(view.getContext(), actionTextColor));
+        }
+
+        if (isActionTextBold != null && isActionTextBold) {
+            mActionText.setTypeface(mActionText.getTypeface(), Typeface.BOLD);
+        }
+
         if (actionListener != null) {
-            mActionButton.setOnClickListener(new View.OnClickListener() {
+
+            View.OnClickListener clickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     boolean shouldDismiss = actionListener.onAction();
@@ -179,7 +253,10 @@ public class ActionSnackbarView extends SnackbarView {
                         }
                     }
                 }
-            });
+            };
+
+            mActionButton.setOnClickListener(clickListener);
+            mActionText.setOnClickListener(clickListener);
         }
 
         if (titleTextSize != null) {
@@ -196,7 +273,6 @@ public class ActionSnackbarView extends SnackbarView {
             } else {
                 mTitle.setTextAppearance(titleStyle);
             }
-
         }
 
         if (messageStyle != null) {
@@ -205,7 +281,6 @@ public class ActionSnackbarView extends SnackbarView {
             } else {
                 mTitle.setTextAppearance(messageStyle);
             }
-
         }
 
         if (elevation != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -214,13 +289,11 @@ public class ActionSnackbarView extends SnackbarView {
             view.setPadding(0, 0, 0, ViewUtils.convertDpToPixel(view.getContext(), elevation));
             parentLayout.setElevation(ViewUtils.convertDpToPixel(view.getContext(), elevation));
         }
-
-
     }
 
     @Override
     public void onDismissed() {
-        if(dismissListener != null){
+        if (dismissListener != null) {
             dismissListener.onDismissed();
         }
     }
@@ -239,9 +312,10 @@ public class ActionSnackbarView extends SnackbarView {
     public View onCreateView(ViewGroup parent) {
         view = (FrameLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_action_snakbar_item, parent, false);
         parentLayout = view.findViewById(R.id.view_snackbar_item_parent);
-        mTitle =  view.findViewById(R.id.text_view_title);
+        mTitle = view.findViewById(R.id.text_view_title);
         mMessage = view.findViewById(R.id.text_view_message);
         mActionButton = view.findViewById(R.id.button_action);
+        mActionText = view.findViewById(R.id.text_action);
         return view;
     }
 
@@ -333,6 +407,22 @@ public class ActionSnackbarView extends SnackbarView {
         return actionButtonMarginBottom;
     }
 
+    public Integer getActionTextMarginLeft() {
+        return actionButtonMarginLeft;
+    }
+
+    public Integer getActionTextMarginTop() {
+        return actionButtonMarginTop;
+    }
+
+    public Integer getActionTextMarginRight() {
+        return actionButtonMarginRight;
+    }
+
+    public Integer getActionTextMarginBottom() {
+        return actionButtonMarginBottom;
+    }
+
     public Integer getTitleTextSize() {
         return titleTextSize;
     }
@@ -356,33 +446,75 @@ public class ActionSnackbarView extends SnackbarView {
     public static class Builder {
 
         private String title;
+
         private String message;
+
         private Integer titleColor;
+
         private Integer messageColor;
+
         private Integer backgroundColor;
+
         private Integer duration;
+
         private ActionListener actionListener;
+
         private DismissListener dismissListener;
+
         private Integer drawable;
+
+        private String actionText;
+
+        private Boolean isActionTextBold;
+
         private boolean isTitleBold;
+
         private boolean isMessageBold;
+
         private Integer titleMarginLeft;
+
         private Integer titleMarginTop;
+
         private Integer titleMarginRight;
+
         private Integer titleMarginBottom;
+
         private Integer messageMarginLeft;
+
         private Integer messageMarginTop;
+
         private Integer messageMarginRight;
+
         private Integer messageMarginBottom;
+
         private Integer actionButtonMarginLeft;
+
         private Integer actionButtonMarginTop;
+
         private Integer actionButtonMarginRight;
+
         private Integer actionButtonMarginBottom;
+
+        private Integer actionTextMarginLeft;
+
+        private Integer actionTextMarginTop;
+
+        private Integer actionTextMarginRight;
+
+        private Integer actionTextMarginBottom;
+
+        private Integer actionTextColor;
+
         private Integer titleTextSize;
+
         private Integer messageTextSize;
+
         private Integer titleStyle;
+
         private Integer messageStyle;
+
         private Integer elevation;
+
         private boolean swipeToDismiss;
 
 
@@ -391,7 +523,7 @@ public class ActionSnackbarView extends SnackbarView {
             return this;
         }
 
-        public Builder withSwipeToDismiss(){
+        public Builder withSwipeToDismiss() {
             swipeToDismiss = true;
             return this;
         }
@@ -483,11 +615,34 @@ public class ActionSnackbarView extends SnackbarView {
             return this;
         }
 
+        public Builder withActionTextColor(@ColorRes Integer color) {
+            this.actionTextColor = color;
+            return this;
+        }
+
+        public Builder withActionText(String string) {
+            this.actionText = string;
+            return this;
+        }
+
+        public Builder withBoldActionTextStyle() {
+            this.isActionTextBold = true;
+            return this;
+        }
+
         public Builder withMarginsAroundActionButton(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom) {
             actionButtonMarginLeft = left;
             actionButtonMarginTop = top;
             actionButtonMarginRight = right;
             actionButtonMarginBottom = bottom;
+            return this;
+        }
+
+        public Builder withMarginsAroundActionText(@NonNull Integer left, @NonNull Integer top, @NonNull Integer right, @NonNull Integer bottom) {
+            actionTextMarginLeft = left;
+            actionTextMarginTop = top;
+            actionTextMarginRight = right;
+            actionTextMarginBottom = bottom;
             return this;
         }
 
