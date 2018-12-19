@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="kaufland.com.demo.MainActivity">
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 tools:context="kaufland.com.demo.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp" />
+        android:elevation="4dp"/>
 
 
     <LinearLayout
@@ -22,22 +22,31 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/create_action_text_snackbar_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:background="@color/colorPrimary"
+            android:text="Create Action Text Snackbar"
+            android:textStyle="bold"/>
+
+        <Button
             android:id="@+id/create_text_snackbar_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:layout_marginBottom="@dimen/default_vertical_margin"
-            android:textStyle="bold"
-            android:text="Create Action Snackbar" />
+            android:background="@color/colorPrimary"
+            android:text="Create Action Snackbar"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/create_snackbar_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:layout_marginBottom="@dimen/default_vertical_margin"
-            android:textStyle="bold"
-            android:text="Create Default Snackbar" />
+            android:background="@color/colorPrimary"
+            android:text="Create Default Snackbar"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>
