@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import java.lang.ref.WeakReference;
+
 import kaufland.com.snackbarlibrary.utils.SwipeToDeleteCallback;
 import kaufland.com.snackbarlibrary.view.SnackbarAdapter;
 import kaufland.com.snackbarlibrary.view.SnackbarView;
@@ -59,19 +61,31 @@ public class Snackbar {
 
         if (mRootLayout == null || !mContext.equals(mRootLayout.getContext())) {
             WindowManager.LayoutParams layoutParams = createDefaultLayoutParams();
-            mRootLayout = new FrameLayout(mContext) {
-                @Override
-                protected void onAttachedToWindow() {
-                    super.onAttachedToWindow();
-                    onRootViewAvailable(this);
-                }
-            };
+            mRootLayout = new KFrameLayout(mContext, this);
 
             try {
                 mWindowManager.addView(mRootLayout, layoutParams);
             } catch (WindowManager.BadTokenException e) {
                 Log.d("exception", e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called
+            }
+        }
+    }
+
+    private static class KFrameLayout extends FrameLayout {
+
+        private WeakReference<Snackbar> mReference;
+
+        public KFrameLayout(@NonNull Context context, Snackbar snackbar) {
+            super(context);
+            mReference = new WeakReference<>(snackbar);
+        }
+
+        @Override
+        protected void onAttachedToWindow() {
+            super.onAttachedToWindow();
+            if (mReference.get() != null) {
+                mReference.get().onRootViewAvailable(this);
             }
         }
     }
@@ -138,16 +152,18 @@ public class Snackbar {
     }
 
     public void updateContext(Context context) {
+        removeViewFromWindowManager();
+        mRootLayout = null;
         mContext = context;
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        removeViewFromWindowManager();
     }
 
     private void removeViewFromWindowManager() {
         if (mRootLayout != null && mWindowManager != null) {
             try {
-                mWindowManager.removeView(mRootLayout);
+                ((RecyclerView)mRootLayout.findViewById(R.id.snackbar_recycler)).setAdapter(null);
+                mWindowManager.removeViewImmediate(mRootLayout);
             } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
                 Log.d(TAG, e.getMessage());
                 //can happen if activity changed and method is called before updateContext was called

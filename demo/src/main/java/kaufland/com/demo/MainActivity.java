@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                                                      .build());
 
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                finish();
 
             }
         });
