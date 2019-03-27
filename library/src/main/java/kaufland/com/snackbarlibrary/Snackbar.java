@@ -162,7 +162,10 @@ public class Snackbar {
     private void removeViewFromWindowManager() {
         if (mRootLayout != null && mWindowManager != null) {
             try {
-                ((RecyclerView)mRootLayout.findViewById(R.id.snackbar_recycler)).setAdapter(null);
+                RecyclerView view = mRootLayout.findViewById(R.id.snackbar_recycler);
+                if (view != null) {
+                    view.setAdapter(null);
+                }
                 mWindowManager.removeViewImmediate(mRootLayout);
             } catch (WindowManager.BadTokenException | IllegalArgumentException e) {
                 Log.d(TAG, e.getMessage());
