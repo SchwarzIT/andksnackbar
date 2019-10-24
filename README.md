@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/Kaufland/andksnackbar.svg?branch=develop)](https://travis-ci.org/Kaufland/andksnackbar)
-[![codecov](https://codecov.io/gh/Kaufland/andksnackbar/branch/develop/graph/badge.svg)](https://codecov.io/gh/Kaufland/andksnackbar)
-[![KIS](https://img.shields.io/badge/KIS-awesome-red.svg)](http://www.spannende-it.de)
+[![Build Status](https://travis-ci.org/SchwarzIt/andksnackbar.svg?branch=develop)](https://travis-ci.org/Kaufland/andksnackbar)
+[![codecov](https://codecov.io/gh/SchwarzIt/andksnackbar/branch/develop/graph/badge.svg)](https://codecov.io/gh/Kaufland/andksnackbar)
 
 # andksnackbar
 is an Android library for creating highly customisable Snackbars which persist among Activity changes.
